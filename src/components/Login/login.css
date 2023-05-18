@@ -1,0 +1,49 @@
+.ca{
+    margin-top: 100px;
+    margin-left: 700px;
+  width: 500px;
+  border-radius: 25px;
+  color: white;
+  background-color: #242e49;
+  color: white;
+  height: 450px;
+  font-family: 'Source Code Pro', monospace;
+  padding-top: 10px;
+}
+.header1{
+    margin-left: 180px;
+}
+.f1
+{
+    margin-left: 10px;
+}
+.i1[type="text"],[type="password"], textarea{
+    margin-left: 10px;
+     width: 450px;
+     border-radius: 4px;
+}
+.in{
+    margin-left: 30px;
+}
+.b{
+    margin-left: 30px;
+  background-color:  #3ed37c;
+  width: 400px;
+  height: 45px;
+  border-radius: 10px;
+  font-size: large;
+}
+.signin{
+    margin-left: 160px;
+    text-decoration: none;
+    color: #66d73c;
+}
+
+.lol{
+    background-color: #141b2d;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    width: 100%;
+}
+
