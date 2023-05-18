@@ -17,6 +17,7 @@ import Form from "./components/Admin_Module/form";
 import MSI_Data from "./components/Admin_Module/MSI_Data";
 import HospitalData from "./components/Admin_Module/HospitalData";
 import VaccineManagerData from "./components/Admin_Module/VM_Data";
+import FeedbackView from "./components/Admin_Module/view_feedback/feedback";
 
 //Imports For VaccineManager
 import Add_Vaccine from "./components/Vaccine_Manager_Module/Add_Vaccines";
@@ -74,6 +75,8 @@ import VaccineData_OS from "./components/Worker_Module/Vaccine_Data/VaccineData_
 import Parent_Dashboard from "./components/Parent_Module/Parent_Dashboard";
 import Parent_View_Birth_Records from "./components/Parent_Module/View_Birth_Records";
 import Parent_View_Vaccine_Records from "./components/Parent_Module/View_Vaccine_Records";
+import FeedbackForm from "./components/Parent_Module/Parent_Feedback/feedback";
+
 function App() {
   const [theme, colorMode] = useMode();
   // const [isSidebar, setIsSidebar] = useState(true);
@@ -133,6 +136,12 @@ function App() {
         setEmail(data.email);
         sessionStorage.setItem("Email", Email);
        }
+
+       if (data && data.email && loggedIn=='Parent') 
+       {
+        setEmail(data.email);
+        sessionStorage.setItem("Email", Email);
+       }
        
       sessionStorage.setItem("role", loggedIn);
     });
@@ -160,6 +169,7 @@ function App() {
           <Route path="/MSI_registration" element={<MSI_Registration Email={Email} />} />
           <Route path="/hospital_registration" element={<Hospital_Registration Email={Email}/>} />
           <Route path="/msi_data" element={<MSI_Data />} />
+          <Route path="/FeedbackView" element={<FeedbackView />} />
         </>
       )}
 
@@ -237,6 +247,7 @@ function App() {
           <Route path="/parent_Dashboard" element={<Parent_Dashboard />} />
           <Route path="/Parent_View_Birth_Records" element={<Parent_View_Birth_Records/>} />
           <Route path="/Parent_View_Vaccine_Records" element={<Parent_View_Vaccine_Records/>} />
+          <Route path="/FeedbackForm" element={<FeedbackForm Email={Email}/>} />
         </>
       )}
       

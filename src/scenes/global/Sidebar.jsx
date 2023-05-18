@@ -9,7 +9,6 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import LocalHospitalSharpIcon from '@mui/icons-material/LocalHospitalSharp';
-import VaccinesOutlinedIcon from '@mui/icons-material/VaccinesOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -177,8 +176,8 @@ const Sidebar = () => {
 
 
             <Item
-              title="FAQ Page"
-              to="/faq"
+              title="View Feedback"
+              to="/FeedbackView"
               icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

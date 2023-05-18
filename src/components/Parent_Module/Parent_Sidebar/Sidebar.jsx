@@ -131,15 +131,9 @@ const Parent_Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Data
+              Pages
             </Typography>
-            <Item
-              title="Manage Children"
-              to=""
-              icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+
             <Item
               title="View Vaccination Record"
               to="/Parent_View_Vaccine_Records"
@@ -164,18 +158,12 @@ const Parent_Sidebar = () => {
               setSelected={setSelected}
             /> */}
           
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Pages
-            </Typography>
+            
             
 
             <Item
-              title="FAQ Page"
-              to=""
+              title="Feedback Page"
+              to="/FeedbackForm"
               icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

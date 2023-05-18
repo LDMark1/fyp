@@ -29,17 +29,17 @@ const Parent_View_Vaccine_Records = () => {
   const columns = [
     { field: "id", headerName: "Serial#", flex: 1,},
     {
-      field: "childId",
-      headerName: "Child ID",
+      field: "childName",
+      headerName: "Child Name",
       flex: 1,
     },
     {
-      field: "VaccineId",
-      headerName: "Vaccine ID",
+      field: "vaccineName",
+      headerName: "Vaccine Name",
       flex: 1,
     },
     {
-        field: "OS_Email",
+        field: "RegisteredBy",
         headerName: "Registered By",
         flex: 2.5,
     },
