@@ -21,6 +21,7 @@ const baseURL = 'http://127.0.0.1:8000/countHealthCareWorkerAdmins'
 const baseURL1 = 'http://127.0.0.1:8000/countHospitalForDirectorEPI'
 const baseURL2 = "http://127.0.0.1:8000/countVaccineAssignedToHealthCareWorkerAdmin"; 
 const baseURL3 = "http://127.0.0.1:8000/countVaccineAssignedToHospital"; 
+const baseURL4 = "http://127.0.0.1:8000/savevac";
 
 const Director_EPI_Dashboard = (props) => {
   const theme = useTheme();
@@ -31,6 +32,7 @@ const Director_EPI_Dashboard = (props) => {
   const [VaccinesCount, setVaccinesCount] = useState(0);
   const [HCWsCount, setHCWsCount] = useState(0);
   const [VaccinesCountForHospital, setVaccinesCountForHospital] = useState(0);
+  const [vac, setvac] = useState([]);
 
   useEffect(() => {
     if (props.Email) {
@@ -51,6 +53,12 @@ const Director_EPI_Dashboard = (props) => {
   //     .then((data) => data.json())
   //     .then((data) => setHospitalsCount(data))
   // }, [])
+
+  useEffect(() => {
+    fetch(baseURL4)
+      .then((data) => data.json())
+      .then((data) => setvac(data))
+  }, [])
 
   useEffect(() => {
     fetch(baseURL2)
@@ -232,9 +240,9 @@ const Director_EPI_Dashboard = (props) => {
               Recent Vaccines
             </Typography>
           </Box>
-          {mockTransactions.map((transaction, i) => (
+          {vac.map((transaction, i) => (
             <Box
-              key={`${transaction.txId}-${i}`}
+              key={`${transaction.id}-${i}`}
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -247,19 +255,19 @@ const Director_EPI_Dashboard = (props) => {
                   variant="h5"
                   fontWeight="600"
                 >
-                  {transaction.txId}
+                  {transaction.id}
                 </Typography>
                 <Typography color={colors.grey[100]}>
-                  {transaction.user}
+                  {transaction.vaccineName}
                 </Typography>
               </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
+              <Box color={colors.grey[100]}>{transaction.vaccinetype}</Box>
               <Box
                 backgroundColor={colors.greenAccent[500]}
                 p="5px 10px"
                 borderRadius="4px"
               >
-                ${transaction.cost}
+                {transaction.vaccinequantity}
               </Box>
             </Box>
           ))}

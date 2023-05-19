@@ -3,7 +3,6 @@ import { tokens } from "../../../theme";
 import { mockTransactions } from "../../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import LocalHospitalSharpIcon from '@mui/icons-material/LocalHospitalSharp';
-import VaccinesSharpIcon from '@mui/icons-material/VaccinesSharp';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../../Charts/Header";
 import LineChart from "../../Charts/LineChart";
@@ -22,6 +21,7 @@ const baseURL = 'http://127.0.0.1:8000/countdepi'
 const baseURL1 = 'http://127.0.0.1:8000/counthosp'
 const baseURL2 = "http://127.0.0.1:8000/countmsi";
 const baseURL3 = "http://127.0.0.1:8000/countvacM";
+const baseURL4 = "http://127.0.0.1:8000/savevac";
 
 
 const Dashboard = () => {
@@ -33,6 +33,7 @@ const Dashboard = () => {
   const [VaccinesCount, setVaccinesCount] = useState(0);
   const [MSIsCount, setMSIsCount] = useState(0);
   const [EPIsCount, setEPIsCount] = useState(0);
+  const [vac, setvac] = useState([]);
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -46,7 +47,11 @@ const Dashboard = () => {
       .then((data) => data.json())
       .then((data) => setHospitalsCount(data))
   }, [])
-
+  useEffect(() => {
+    fetch(baseURL4)
+      .then((data) => data.json())
+      .then((data) => setvac(data))
+  }, [])
   useEffect(() => {
     fetch(baseURL2)
       .then((data) => data.json())
@@ -185,14 +190,14 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Hospital Data
+                 Over all Data
               </Typography>
               <Typography
                 variant="h3"
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
+              
               </Typography>
             </Box>
             <Box>
@@ -226,9 +231,9 @@ const Dashboard = () => {
               Recent Vaccines
             </Typography>
           </Box>
-          {mockTransactions.map((transaction, i) => (
+          {vac.map((transaction, i) => (
             <Box
-              key={`${transaction.txId}-${i}`}
+              key={`${transaction.id}-${i}`}
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -241,19 +246,19 @@ const Dashboard = () => {
                   variant="h5"
                   fontWeight="600"
                 >
-                  {transaction.txId}
+                  {transaction.id}
                 </Typography>
                 <Typography color={colors.grey[100]}>
-                  {transaction.user}
+                  {transaction.vaccineName}
                 </Typography>
               </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
+              <Box color={colors.grey[100]}>{transaction.vaccinetype}</Box>
               <Box
                 backgroundColor={colors.greenAccent[500]}
                 p="5px 10px"
                 borderRadius="4px"
               >
-                ${transaction.cost}
+                {transaction.vaccinequantity}
               </Box>
             </Box>
           ))}

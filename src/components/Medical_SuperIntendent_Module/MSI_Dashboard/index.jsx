@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 const baseURL = 'http://127.0.0.1:8000/countOperatingStaff'
 const baseURL1 = 'http://127.0.0.1:8000/countVaccineAssignedToHospital'
 const baseURL2 = 'http://127.0.0.1:8000/countRetrieveBirthRecordsForMSI'
+const baseURL4 = "http://127.0.0.1:8000/savevac";
+
 
 const MSI_Dashboard = () => {
   const theme = useTheme();
@@ -29,6 +31,7 @@ const MSI_Dashboard = () => {
   const [OperatingStaff, setOperatingStaff] = useState(0);
   const [Birth_Records, setBirth_Records] = useState(0);
   const [Vaccine_Count, setVaccine_Count] = useState(0);
+  const [vac, setvac] = useState([]);
   
   useEffect(() => {
     fetch(baseURL)
@@ -49,6 +52,11 @@ const MSI_Dashboard = () => {
       .then((data) => setBirth_Records(data))
   }, [])
 
+  useEffect(() => {
+    fetch(baseURL4)
+      .then((data) => data.json())
+      .then((data) => setvac(data))
+  }, [])
  
 
   return (
@@ -197,9 +205,9 @@ const MSI_Dashboard = () => {
               Recent Vaccines
             </Typography>
           </Box>
-          {mockTransactions.map((transaction, i) => (
+          {vac.map((transaction, i) => (
             <Box
-              key={`${transaction.txId}-${i}`}
+              key={`${transaction.id}-${i}`}
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -212,19 +220,19 @@ const MSI_Dashboard = () => {
                   variant="h5"
                   fontWeight="600"
                 >
-                  {transaction.txId}
+                  {transaction.id}
                 </Typography>
                 <Typography color={colors.grey[100]}>
-                  {transaction.user}
+                  {transaction.vaccineName}
                 </Typography>
               </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
+              <Box color={colors.grey[100]}>{transaction.vaccinetype}</Box>
               <Box
                 backgroundColor={colors.greenAccent[500]}
                 p="5px 10px"
                 borderRadius="4px"
               >
-                ${transaction.cost}
+                {transaction.vaccinequantity}
               </Box>
             </Box>
           ))}
