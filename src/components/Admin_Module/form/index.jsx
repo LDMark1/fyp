@@ -5,13 +5,14 @@ import { Formik } from "formik";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Charts/Header";
 import Sidebar from "../../../scenes/global/Sidebar";
-import './index.css'
 import axios from 'axios';
+import Topbar from '../../../scenes/global/Topbar';
 
 const cnicRegex = /^[0-9]+$/;
 
 const Form = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [isSidebar, setIsSidebar] = useState(true);
 
   const [fullName, setfullName]=useState("");
   const [directorEPIEmail, setEmail]=useState("");
@@ -79,8 +80,10 @@ if (respons==200){
 }
   return (
     <>
-    
-    <Sidebar/>
+    <div className="app">
+    <Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className="form">
     <Box m="20px">
       <Header title="CREATE Director EPI" subtitle="Create a New Director EPI" />
@@ -182,6 +185,8 @@ if (respons==200){
         )}
       </Formik>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

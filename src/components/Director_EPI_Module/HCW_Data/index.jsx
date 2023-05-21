@@ -7,11 +7,13 @@ import Director_EPI_Sidebar from "../Director_EPI_Sidebar/Sidebar";
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Topbar from "../../../scenes/global/Topbar";
 
 const baseURL = "http://127.0.0.1:8000/saveHCWAdmin";
 
 
 const HCW_Admin_Data = () => {
+  const [isSidebar, setIsSidebar] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableData, setTableData] = useState([]);
@@ -94,7 +96,10 @@ const HCW_Admin_Data = () => {
 
   return (
     <>
-    <Director_EPI_Sidebar/>
+    <div className="app">
+    <Director_EPI_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className='Contacts'>
     <Box m="20px">
       <Header
@@ -152,6 +157,8 @@ const HCW_Admin_Data = () => {
         />
       </Box>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

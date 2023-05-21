@@ -6,11 +6,13 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Charts/Header";
 import Vaccine_Manager_Sidebar from '../Vaccine_Manager_Sidebar/Sidebar';
 import axios from 'axios';
+import Topbar from '../../../scenes/global/Topbar'
 
 const cnicRegex = /^[0-9]+$/;
 
 const Add_Vaccine = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [isSidebar, setIsSidebar] = useState(true);
 
 
   const [vaccineName, setvaccineName]=useState("");
@@ -67,8 +69,10 @@ if (respons==200){
 
   return (
     <>
-    
-    <Vaccine_Manager_Sidebar/>
+    <div className="app">
+    <Vaccine_Manager_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className="form">
     <Box m="20px">
       <Header title="ADD Vaccine" subtitle="Add a new Vaccine" />
@@ -145,6 +149,8 @@ if (respons==200){
         )}
       </Formik>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

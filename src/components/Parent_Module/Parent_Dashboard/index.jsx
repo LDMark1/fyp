@@ -1,6 +1,5 @@
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
-import { mockTransactions } from "../../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import VaccinesSharpIcon from '@mui/icons-material/VaccinesSharp';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -14,6 +13,7 @@ import { useState, useEffect } from "react";
 import "react-pro-sidebar/dist/css/styles.css";
 import Parent_Sidebar from "../Parent_Sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
+import Topbar from "../../../scenes/global/Topbar";
 
 const baseURL4 = "http://127.0.0.1:8000/savevac";
 
@@ -48,7 +48,10 @@ const Parent_Dashboard = () => {
 
   return (
     <>
+    <div className="app">
     <Parent_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className="Dashboard">
     <Box m="20px">
       {/* HEADER */}
@@ -270,6 +273,8 @@ const Parent_Dashboard = () => {
         </Box>
       </Box>
     </Box>
+    </div>
+    </main>
     </div>
     </>
     );

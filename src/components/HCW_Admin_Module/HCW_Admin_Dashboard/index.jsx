@@ -1,20 +1,16 @@
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
-import { mockTransactions } from "../../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import LocalHospitalSharpIcon from '@mui/icons-material/LocalHospitalSharp';
 import VaccinesSharpIcon from '@mui/icons-material/VaccinesSharp';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../../Charts/Header";
 import LineChart from "../../Charts/LineChart";
-import GeographyChart from "../../Charts/GeographyChart";
-import BarChart from "../../Charts/BarChart";
 import StatBox from "../../StatBox";
-import ProgressCircle from "../../Charts/ProgressCircle";
 import { useState, useEffect } from "react";
 import "react-pro-sidebar/dist/css/styles.css";
 import HCW_Admin_Sidebar from "../HCW_Admin_Sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
+import Topbar from "../../../scenes/global/Topbar";
 
 
 const baseURL = 'http://127.0.0.1:8000/counthcw'
@@ -61,7 +57,10 @@ const HCW_Admin_Dashboard = () => {
    
   return (
     <>
+    <div className="app">
     <HCW_Admin_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className="Dashboard">
     <Box m="20px">
       {/* HEADER */}
@@ -238,70 +237,11 @@ const HCW_Admin_Dashboard = () => {
         </Box>
 
         {/* ROW 3 */}
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          p="30px"
-          sx={{ borderRadius: '13px' }}
-        >
-          <Typography variant="h5" fontWeight="600">
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography
-              variant="h5"
-              color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
-            >
-              $48,352 revenue generated
-            </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          sx={{ borderRadius: '13px' }}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Sales Quantity
-          </Typography>
-          <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          padding="30px"
-          sx={{ borderRadius: '13px' }}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ marginBottom: "15px" }}
-          >
-            Geography Based Traffic
-          </Typography>
-          <Box height="200px">
-            <GeographyChart isDashboard={true} />
-          </Box>
-        </Box>
+      
       </Box>
     </Box>
+    </div>
+    </main>
     </div>
     </>
     );

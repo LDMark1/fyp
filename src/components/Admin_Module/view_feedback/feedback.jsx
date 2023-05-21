@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Paper, Typography, List, ListItem, ListItemText } from '@material-ui/core';
 import axios from 'axios';
+import Topbar from '../../../scenes/global/Topbar'
+import Sidebar from "../../../scenes/global/Sidebar";
 
 const FeedbackView = () => {
   const [feedbackList, setFeedbackList] = useState([]);
+  const [isSidebar, setIsSidebar] = useState(true);
 
   useEffect(() => {
     fetchFeedbackList();
@@ -19,6 +22,11 @@ const FeedbackView = () => {
   };
 
   return (
+    <>
+    <div className="app">
+    <Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <Grid container justify="center" alignItems="center" style={{ height: '100vh' }}>
       <Grid item xs={6}>
         <Paper elevation={3} style={{ padding: '2rem' }}>
@@ -37,6 +45,9 @@ const FeedbackView = () => {
         </Paper>
       </Grid>
     </Grid>
+    </main>
+    </div>
+    </>
   );
 };
 

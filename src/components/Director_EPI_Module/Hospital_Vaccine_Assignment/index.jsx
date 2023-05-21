@@ -1,15 +1,17 @@
 import React,{useState, useEffect} from 'react';
 import { Box, Button, TextField, MenuItem } from "@mui/material";
 import { useNavigate} from 'react-router-dom'; 
-import { Formik } from "formik";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Charts/Header";
 import Director_EPI_Sidebar from '../Director_EPI_Sidebar/Sidebar';
 import axios from 'axios';
+import Topbar from '../../../scenes/global/Topbar';
+import { Formik } from 'formik';
 
 
 const Hospital_Vaccination_Assignment = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [isSidebar, setIsSidebar] = useState(true);
 
 
   const [Vaccine_Quantity, setVaccine_Quantity]=useState();
@@ -145,8 +147,10 @@ if (respons==200){
 
   return (
     <>
-    
-    <Director_EPI_Sidebar/>
+    <div className="app">
+    <Director_EPI_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar}/>
     <div className="form">
     <Box m="20px">
       <Header title="Assign Vaccine" subtitle="Assign Vaccine To a Hospital" />
@@ -238,6 +242,8 @@ if (respons==200){
         )}
       </Formik>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

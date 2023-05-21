@@ -6,10 +6,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Charts/Header";
 import Vaccine_Manager_Sidebar from '../Vaccine_Manager_Sidebar/Sidebar';
 import axios from 'axios';
+import Topbar from '../../../scenes/global/Topbar'
 
 
 const Director_EPI_Vaccine_Assignment = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [isSidebar, setIsSidebar] = useState(true);
 
   const [Vaccine_Quantity, setVaccine_Quantity]=useState();
 
@@ -132,8 +134,10 @@ const Director_EPI_Vaccine_Assignment = (props) => {
 
   return (
     <>
-    
-    <Vaccine_Manager_Sidebar/>
+    <div className="app">
+    <Vaccine_Manager_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className="form">
     <Box m="20px">
       <Header title="Assign Vaccine" subtitle="Assign Vaccine To a Director EPI" />
@@ -217,6 +221,8 @@ const Director_EPI_Vaccine_Assignment = (props) => {
         )}
       </Formik>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

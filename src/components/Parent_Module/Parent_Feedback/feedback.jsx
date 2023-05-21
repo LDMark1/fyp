@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { TextField, Button, Modal, Grid, Paper, Typography } from '@material-ui/core';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Parent_Sidebar from '../Parent_Sidebar/Sidebar';
+import Topbar from '../../../scenes/global/Topbar';
 
 const FeedbackForm = (props) => {
   const [feedback, setFeedback] = useState('');
+  const [isSidebar, setIsSidebar] = useState(true);
   const Father_Email = props.Email;
 console.log(props)
   const handleInputChange = (event) => {
@@ -38,6 +41,11 @@ console.log(props)
   };
 
   return (
+    <>
+    <div className="app">
+    <Parent_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <Grid container justify="center" alignItems="center" style={{ height: '100vh' }}>
       <Grid item xs={6}>
         <Paper elevation={3} style={{ padding: '2rem' }}>
@@ -62,6 +70,9 @@ console.log(props)
         </Paper>
       </Grid>
     </Grid>
+    </main>
+    </div>
+    </>
   );
 };
 

@@ -2,16 +2,17 @@ import React,{useState, useEffect} from 'react';
 import { useNavigate} from 'react-router-dom';
 import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
-import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Charts/Header";
 import OS_Sidebar from "../OS_Sidebar/Sidebar";
 import axios from 'axios';
+import Topbar from '../../../scenes/global/Topbar';
 
 const baseURL = "http://127.0.0.1:8000/getHospitalIDofOS";
 
 const OS_Birth_Record = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [isSidebar, setIsSidebar] = useState(true);
 
 
   const [id, setid]=useState("");
@@ -103,8 +104,10 @@ if (respons==200){
 
   return (
     <>
-    
-    <OS_Sidebar/>
+   <div className="app">
+    <OS_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className="form">
     <Box m="20px">
       <Header title="ADD Birth Record" subtitle="Add a New Birth Record" />
@@ -112,18 +115,10 @@ if (respons==200){
       <Formik
         // onSubmit={handleFormSubmit}
         onSubmit={saveData}
-        initialValues={initialValues}
-        validationSchema={checkoutSchema}
       >
         {({
-          values,
-          errors,
-          touched,
           handleBlur,
-          // handleChange,
-          // handleSubmit,
         }) => (
-          // <form onSubmit={handleSubmit}>
           <form onSubmit={saveData}>
             <Box
               display="grid"
@@ -142,8 +137,6 @@ if (respons==200){
                 onChange={(e)=>{setid(e.target.value); anotherFunction();}}
                 value={id}
                 name="id"
-                // error={!!touched.firstName && !!errors.firstName}
-                // helperText={touched.firstName && errors.firstName}
                 sx={{ gridColumn: "span 1" }}
               />
 
@@ -156,8 +149,6 @@ if (respons==200){
                 onChange={(e)=>{setfullName(e.target.value); anotherFunction();}}
                 value={fullName}
                 name="firstName"
-                // error={!!touched.firstName && !!errors.firstName}
-                // helperText={touched.firstName && errors.firstName}
                 sx={{ gridColumn: "span 3" }}
               />
               
@@ -170,8 +161,6 @@ if (respons==200){
                 onChange={(e)=>{setFather_Email(e.target.value); anotherFunction();}}
                 value={Father_Email}
                 name="Father_Email"
-                // error={!!touched.email && !!errors.email}
-                // helperText={touched.email && errors.email}
                 sx={{ gridColumn: "span 1" }}
               />
               <TextField
@@ -183,8 +172,6 @@ if (respons==200){
                 onChange={(e)=>{setPassword(e.target.value); anotherFunction();}}
                 value={Password}
                 name="Password"
-                // error={!!touched.email && !!errors.email}
-                // helperText={touched.email && errors.email}
                 sx={{ gridColumn: "span 2" }}
               />
               <TextField
@@ -196,8 +183,6 @@ if (respons==200){
                 onChange={(e)=>{setContact(e.target.value); anotherFunction();}}
                 value={Contact}
                 name="Contact"
-                // error={!!touched.contact && !!errors.contact}
-                // helperText={touched.contact && errors.contact}
                 sx={{ gridColumn: "span 1" }}
               />
               <TextField
@@ -209,8 +194,7 @@ if (respons==200){
                 onChange={(e)=>{setFather_CNIC(e.target.value); anotherFunction();}}
                 value={Father_CNIC}
                 name="Father_CNIC"
-                // error={!!touched.address2 && !!errors.address2}
-                // helperText={touched.address2 && errors.address2}
+                
                 sx={{ gridColumn: "span 2" }}
               />
                  <TextField
@@ -222,8 +206,6 @@ if (respons==200){
                 onChange={(e)=>{setMother_CNIC(e.target.value); anotherFunction();}}
                 value={Mother_CNIC}
                 name="Mother_CNIC"
-                // error={!!touched.address2 && !!errors.address2}
-                // helperText={touched.address2 && errors.address2}
                 sx={{ gridColumn: "span 2" }}
               />
               <TextField
@@ -235,8 +217,6 @@ if (respons==200){
                 onChange={(e)=>{setGender(e.target.value); anotherFunction();}}
                 value={Gender}
                 name="Gender"
-                // error={!!touched.address2 && !!errors.address2}
-                // helperText={touched.address2 && errors.address2}
                 sx={{ gridColumn: "span 1" }}
               />
               <TextField
@@ -248,8 +228,6 @@ if (respons==200){
                 onChange={(e)=>{setchildWeight(e.target.value); anotherFunction();}}
                 value={childWeight}
                 name="childWeight"
-                // error={!!touched.address2 && !!errors.address2}
-                // helperText={touched.address2 && errors.address2}
                 sx={{ gridColumn: "span 2" }}
               />
               <TextField
@@ -261,8 +239,6 @@ if (respons==200){
                 onChange={(e)=>{setchildLength(e.target.value); anotherFunction();}}
                 value={childLength}
                 name="childLength"
-                // error={!!touched.address2 && !!errors.address2}
-                // helperText={touched.address2 && errors.address2}
                 sx={{ gridColumn: "span 1" }}
               />
               <TextField
@@ -274,8 +250,6 @@ if (respons==200){
                 onChange={(e)=>{setdeliveryType(e.target.value); anotherFunction();}}
                 value={deliveryType}
                 name="deliveryType"
-                // error={!!touched.address2 && !!errors.address2}
-                // helperText={touched.address2 && errors.address2}
                 sx={{ gridColumn: "span 3" }}
               />
               
@@ -285,11 +259,8 @@ if (respons==200){
                 type="text"
                 label="Hospital ID"
                 onBlur={handleBlur}
-                // onChange={(e)=>{setHospital_ID(e.target.value)}}
                 value={Hospital_ID}
                 name="Hospital_ID"
-                // error={!!touched.address2 && !!errors.address2}
-                // helperText={touched.address2 && errors.address2}
                 sx={{ gridColumn: "span 1" }}
               />
              
@@ -305,31 +276,10 @@ if (respons==200){
       </Formik>
     </Box>
     </div>
+    </main>
+    </div>
     </>
   );
-};
-
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
-});
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  contact: "",
-  address1: "",
-  address2: "",
 };
 
 export default OS_Birth_Record;

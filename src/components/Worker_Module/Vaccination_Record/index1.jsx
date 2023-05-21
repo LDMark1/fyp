@@ -6,11 +6,14 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Charts/Header";
 import OS_Sidebar from "../OS_Sidebar/Sidebar";
 import axios from 'axios';
+import Topbar from '../../../scenes/global/Topbar';
 
 const baseURL = "http://127.0.0.1:8000/getHospitalIDofOS";
 
 const OS_Vaccination_Record = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [isSidebar, setIsSidebar] = useState(true);
+  
   const [error,setError]=useState("");
   const [Vaccine_Description, setVaccine_Description]=useState("");
   const anotherFunction=()=>{
@@ -106,8 +109,10 @@ if (respons==200){
 
   return (
     <>
-    
-    <OS_Sidebar/>
+    <div className="app">
+    <OS_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className="form">
     <Box m="20px">
       <Header title="ADD Vaccination Record" subtitle="Add a New Vaccination Record" />
@@ -192,6 +197,8 @@ if (respons==200){
         )}
       </Formik>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

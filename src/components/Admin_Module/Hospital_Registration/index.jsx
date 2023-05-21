@@ -7,10 +7,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Charts/Header";
 import Sidebar from '../../../scenes/global/Sidebar';
 import axios from 'axios';
+import Topbar from '../../../scenes/global/Topbar'
 
 
 const Hospital_Registration = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [isSidebar, setIsSidebar] = useState(true);
 
 
   // const [id, setHospital_ID]=useState("");
@@ -66,21 +68,18 @@ if (respons==200){
 
   return (
     <>
-    
-    <Sidebar/>
+    <div className="app">
+    <Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className="form">
     <Box m="20px">
       <Header title="REGISTER Hospital" subtitle="Register a New Hospital" />
 
       <Formik
         onSubmit={saveData}
-        initialValues={initialValues}
-        validationSchema={checkoutSchema}
       >
         {({
-          values,
-          errors,
-          touched,
           handleBlur,
         }) => (
           <form onSubmit={saveData}>
@@ -92,19 +91,6 @@ if (respons==200){
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
               }}
             >
-              {/* <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Hospital ID"
-                onBlur={handleBlur}
-                onChange={(e)=>{setHospital_ID(e.target.value)}}
-                value={id}
-                name="Hospital_ID"
-                // error={!!touched.firstName && !!errors.firstName}
-                // helperText={touched.firstName && errors.firstName}
-                sx={{ gridColumn: "span 1" }}
-              /> */}
               <TextField
                 fullWidth
                 variant="filled"
@@ -114,8 +100,6 @@ if (respons==200){
                 onChange={(e)=>{setHospital_Name(e.target.value);anotherFunction();}}
                 value={hospitalName}
                 name="Hospital_Name"
-                // error={!!touched.lastName && !!errors.lastName}
-                // helperText={touched.lastName && errors.lastName}
                 sx={{ gridColumn: "span 4" }}
               />
                <TextField
@@ -127,8 +111,6 @@ if (respons==200){
                 onChange={(e)=>{setHospital_City(e.target.value);anotherFunction();}}
                 value={hospitalCity}
                 name="Hospital_City"
-                // error={!!touched.firstName && !!errors.firstName}
-                // helperText={touched.firstName && errors.firstName}
                 sx={{ gridColumn: "span 2" }}
               />
                 <TextField
@@ -140,8 +122,6 @@ if (respons==200){
                 onChange={(e)=>{setHospital_Province(e.target.value);anotherFunction();}}
                 value={hospitalProvince}
                 name="Hospital_Province"
-                // error={!!touched.firstName && !!errors.firstName}
-                // helperText={touched.firstName && errors.firstName}
                 sx={{ gridColumn: "span 2" }}
               />
 
@@ -154,8 +134,6 @@ if (respons==200){
                 onChange={(e)=>{setAddress(e.target.value);anotherFunction();}}
                 value={hospitalAddress}
                 name="Address"
-                // error={!!touched.contact && !!errors.contact}
-                // helperText={touched.contact && errors.contact}
                 sx={{ gridColumn: "span 4" }}
               />
             </Box>
@@ -170,31 +148,11 @@ if (respons==200){
       </Formik>
     </Box>
     </div>
+    </main>
+    </div>
     </>
   );
 };
 
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
-});
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  contact: "",
-  address1: "",
-  address2: "",
-};
 
 export default Hospital_Registration;

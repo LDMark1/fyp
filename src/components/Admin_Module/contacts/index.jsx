@@ -4,15 +4,16 @@ import { tokens } from "../../../theme";
 import Header from "../../Charts/Header";
 import { useTheme } from "@mui/material";
 import Sidebar from "../../../scenes/global/Sidebar";
-import './index.css'
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
+import Topbar from "../../../scenes/global/Topbar";
 
 const baseURL = "http://127.0.0.1:8000/savedepi";
 
 
 const EPI_Data = () => {
+  const [isSidebar, setIsSidebar] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableData, setTableData] = useState([]);
@@ -97,7 +98,10 @@ const EPI_Data = () => {
 
   return (
     <>
-    <Sidebar/>
+    <div className="app">
+    <Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className='Contacts'>
     <Box m="20px">
       <Header
@@ -155,6 +159,8 @@ const EPI_Data = () => {
         />
       </Box>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

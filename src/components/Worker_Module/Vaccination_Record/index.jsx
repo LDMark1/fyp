@@ -6,9 +6,11 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Charts/Header";
 import HCW_Sidebar from '../HCW_Sidebar/Sidebar';
 import axios from 'axios';
+import Topbar from '../../../scenes/global/Topbar';
 
 const HCW_Vaccination_Record = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [isSidebar, setIsSidebar] = useState(true);
 
   const [Vaccine_Description, setVaccine_Description]=useState("");
 
@@ -79,8 +81,10 @@ if (respons==200){
 
   return (
     <>
-    
-    <HCW_Sidebar/>
+    <div className="app">
+    <HCW_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className="form">
     <Box m="20px">
       <Header title="ADD Vaccination Record" subtitle="Add a New Vaccination Record" />
@@ -164,6 +168,8 @@ if (respons==200){
         )}
       </Formik>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

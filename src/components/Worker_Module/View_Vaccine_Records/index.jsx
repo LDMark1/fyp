@@ -6,11 +6,13 @@ import { useTheme } from "@mui/material";
 import OS_Sidebar from "../OS_Sidebar/Sidebar";
 import React from "react";
 import { useState, useEffect } from "react";
+import Topbar from "../../../scenes/global/Topbar";
 
 const baseURL = "http://127.0.0.1:8000/savevacr";
 
 
 const OS_View_Vaccine_Records = () => {
+  const [isSidebar, setIsSidebar] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableData, setTableData] = useState([]);
@@ -52,7 +54,10 @@ const OS_View_Vaccine_Records = () => {
 
   return (
     <>
-    <OS_Sidebar/>
+    <div className="app">
+    <OS_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className='Contacts'>
     <Box m="20px">
       <Header
@@ -103,6 +108,8 @@ const OS_View_Vaccine_Records = () => {
         />
       </Box>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

@@ -7,11 +7,13 @@ import MSI_Sidebar from "../MSI_Sidebar/Sidebar";
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
+import Topbar from "../../../scenes/global/Topbar";
 
 const baseURL = "http://127.0.0.1:8000/saveOperatingStaff";
 
 
 const OS_Data = () => {
+  const [isSidebar, setIsSidebar] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableData, setTableData] = useState([]);
@@ -81,7 +83,10 @@ const OS_Data = () => {
 
   return (
     <>
-    <MSI_Sidebar/>
+    <div className="app">
+    <MSI_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className='Contacts'>
     <Box m="20px">
       <Header
@@ -139,6 +144,8 @@ const OS_Data = () => {
         />
       </Box>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

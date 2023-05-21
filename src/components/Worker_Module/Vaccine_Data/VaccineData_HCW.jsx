@@ -4,7 +4,7 @@ import { tokens } from "../../../theme";
 import Header from "../../Charts/Header";
 import { useTheme } from "@mui/material";
 import HCW_Sidebar from "../HCW_Sidebar/Sidebar";
-import axios from "axios";
+import Topbar from "../../../scenes/global/Topbar";
 import React from "react";
 import { useState, useEffect } from "react";
 
@@ -12,9 +12,11 @@ const baseURL = "http://127.0.0.1:8000/saveVaccineAssignedToHCW";
 
 
 const VaccineData_HCW = () => {
+  const [isSidebar, setIsSidebar] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableData, setTableData] = useState([]);
+  
 
 
 
@@ -48,7 +50,10 @@ const VaccineData_HCW = () => {
 
   return (
     <>
-    <HCW_Sidebar/>
+    <div className="app">
+    <HCW_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className='Contacts'>
     <Box m="20px">
       <Header
@@ -100,6 +105,8 @@ const VaccineData_HCW = () => {
         />
       </Box>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

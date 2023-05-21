@@ -6,12 +6,14 @@ import { useTheme } from "@mui/material";
 import Director_EPI_Sidebar from "../Director_EPI_Sidebar/Sidebar";
 import React from "react";
 import { useState, useEffect } from "react";
+import Topbar from "../../../scenes/global/Topbar";
 
 const baseURL = "http://127.0.0.1:8000/getHospitalForDirectorEPI";
 
 
 const HospitalData_EPI = (props) => {
   const theme = useTheme();
+  const [isSidebar, setIsSidebar] = useState(true);
   const colors = tokens(theme.palette.mode);
   const [tableData, setTableData] = useState([]);
 
@@ -53,7 +55,10 @@ const HospitalData_EPI = (props) => {
 
   return (
     <>
-    <Director_EPI_Sidebar/>
+    <div className="app">
+    <Director_EPI_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className='Contacts'>
     <Box m="20px">
       <Header
@@ -100,6 +105,8 @@ const HospitalData_EPI = (props) => {
         />
       </Box>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

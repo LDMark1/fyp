@@ -6,12 +6,14 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Charts/Header";
 import HCW_Admin_Sidebar from '../HCW_Admin_Sidebar/Sidebar';
 import axios from 'axios';
+import Topbar from '../../../scenes/global/Topbar';
 
 const baseURL = "http://127.0.0.1:8000/getRegionOf_HCWA";
 const baseURL1 = "http://127.0.0.1:8000/get_HCW_For_HCWA";
 
 const HCW_Vaccination_Assignment = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [isSidebar, setIsSidebar] = useState(true);
 
   const [HCWIDs, setHCWIDs] = useState([]);
   const [selectedHCWIDs, setselectedHCWIDs] = useState("");
@@ -149,8 +151,10 @@ if (respons==200){
 
   return (
     <>
-    
-    <HCW_Admin_Sidebar/>
+     <div className="app">
+    <HCW_Admin_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className="form">
     <Box m="20px">
       <Header title="Assign Vaccine" subtitle="Assign Vaccine To a Healthcare Worker Admin" />
@@ -237,6 +241,8 @@ if (respons==200){
         )}
       </Formik>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

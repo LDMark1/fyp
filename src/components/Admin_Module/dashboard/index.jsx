@@ -1,19 +1,14 @@
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
-import { mockTransactions } from "../../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import LocalHospitalSharpIcon from '@mui/icons-material/LocalHospitalSharp';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../../Charts/Header";
 import LineChart from "../../Charts/LineChart";
-import GeographyChart from "../../Charts/GeographyChart";
-import BarChart from "../../Charts/BarChart";
 import StatBox from "../../StatBox";
-import ProgressCircle from "../../Charts/ProgressCircle";
 import { useState, useEffect } from "react";
 import "react-pro-sidebar/dist/css/styles.css";
 import Sidebar from "../../../scenes/global/Sidebar";
-import './index.css'
 import { useNavigate } from "react-router-dom";
 import Topbar from '../../../scenes/global/Topbar'
 
@@ -99,10 +94,7 @@ const Dashboard = () => {
         >
           <StatBox
             title={  <span
-      style={{
-        fontSize: "30px", // Increase the font size to 30 pixels
-        // Add any other desired styles here
-      }}
+          style={{fontSize: "30px", }}
     >{HospitalsCount.toLocaleString("en-US")} </span>}
             subtitle="Total Hospitals"
             icon={
@@ -110,6 +102,7 @@ const Dashboard = () => {
                 sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
               />
             }
+            increase="+21%"
           />
         </Box>
         <Box
@@ -122,13 +115,13 @@ const Dashboard = () => {
           onClick={()=> navigate("/vaccineManagerData")}
         >
           <StatBox
-            title={VaccinesCount.toLocaleString("en-US")}
+            title={<span style={{fontSize: "30px", }}>{VaccinesCount.toLocaleString("en-US")}</span>}
             subtitle="Vaccine Manager"
             progress="0.50"
             increase="+21%"
             icon={
               <PersonAddIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
               />
             }
           />
@@ -143,13 +136,13 @@ const Dashboard = () => {
           onClick={()=> navigate("/msi_data")}
         >
           <StatBox
-            title={MSIsCount.toLocaleString("en-US")}
-            subtitle="Medical Superintendents"
+            title={<span style={{fontSize: "30px", }}>{MSIsCount.toLocaleString("en-US")}</span> }
+            subtitle="Medical SIs"
             progress="0.30"
             increase="+5%"
             icon={
               <PersonAddIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
               />
             }
           />
@@ -164,13 +157,13 @@ const Dashboard = () => {
           onClick={()=> navigate("/EPI_Data")}
         >
           <StatBox
-            title={EPIsCount.toLocaleString("en-US")}
+            title={<span style={{fontSize: "30px", }}>{EPIsCount.toLocaleString("en-US")}</span> }
             subtitle="Director EPIs"
             progress="0.80"
             increase="+43%"
             icon={
               <PersonAddIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
               />
             }
           />

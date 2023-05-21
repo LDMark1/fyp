@@ -5,6 +5,7 @@ import Header from "../../Charts/Header";
 import { useTheme } from "@mui/material";
 import Director_EPI_Sidebar from "../Director_EPI_Sidebar/Sidebar";
 import { useState, useEffect } from "react";
+import Topbar from "../../../scenes/global/Topbar";
 
 const baseURL = "http://127.0.0.1:8000/saveVaccineAssignedToHealthCareWorkerAdmin";
 
@@ -12,6 +13,8 @@ const baseURL = "http://127.0.0.1:8000/saveVaccineAssignedToHealthCareWorkerAdmi
 const HCWA_Assigned_Vaccines = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [isSidebar, setIsSidebar] = useState(true);
+
   const [tableData, setTableData] = useState([]);
   useEffect(() => {
     fetch(baseURL)
@@ -60,7 +63,10 @@ const HCWA_Assigned_Vaccines = () => {
 
   return (
     <>
-    <Director_EPI_Sidebar/>
+    <div className="app">
+    <Director_EPI_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className='Contacts'>
     <Box m="20px">
       <Header
@@ -107,6 +113,8 @@ const HCWA_Assigned_Vaccines = () => {
         />
       </Box>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

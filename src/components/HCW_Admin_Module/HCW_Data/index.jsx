@@ -7,6 +7,7 @@ import HCW_Admin_Sidebar from "../HCW_Admin_Sidebar/Sidebar";
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Topbar from "../../../scenes/global/Topbar";
 
 const baseURL = "http://127.0.0.1:8000/savehcw";
 
@@ -15,6 +16,7 @@ const HCW_Data = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableData, setTableData] = useState([]);
+  const [isSidebar, setIsSidebar] = useState(true)
 
 
   let updateValueID;
@@ -89,7 +91,10 @@ const HCW_Data = () => {
 
   return (
     <>
-    <HCW_Admin_Sidebar/>
+     <div className="app">
+    <HCW_Admin_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className='Contacts'>
     <Box m="20px">
       <Header
@@ -147,6 +152,8 @@ const HCW_Data = () => {
         />
       </Box>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

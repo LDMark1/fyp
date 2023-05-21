@@ -4,10 +4,10 @@ import { tokens } from "../../../theme";
 import Header from "../../Charts/Header";
 import { useTheme } from "@mui/material";
 import Vaccine_Manager_Sidebar from "../Vaccine_Manager_Sidebar/Sidebar";
-import './index.css'
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
+import Topbar from "../../../scenes/global/Topbar";
 
 const baseURL = "http://127.0.0.1:8000/getDEPIforVM";
 
@@ -16,6 +16,7 @@ const EPI_Data_View = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableData, setTableData] = useState([]);
+  const [isSidebar, setIsSidebar] = useState(true);
 
 
   let updateValueID;
@@ -87,7 +88,10 @@ const EPI_Data_View = (props) => {
 
   return (
     <>
-    <Vaccine_Manager_Sidebar/>
+    <div className="app">
+    <Vaccine_Manager_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className='Contacts'>
     <Box m="20px">
       <Header
@@ -138,6 +142,8 @@ const EPI_Data_View = (props) => {
         />
       </Box>
     </Box>
+    </div>
+    </main>
     </div>
     </>
   );

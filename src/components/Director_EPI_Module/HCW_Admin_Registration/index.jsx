@@ -2,11 +2,11 @@ import React,{useState, useEffect} from 'react';
 import { useNavigate} from 'react-router-dom'; 
 import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
-import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Charts/Header";
 import Director_EPI_Sidebar from "../Director_EPI_Sidebar/Sidebar";
 import axios from 'axios';
+import Topbar from '../../../scenes/global/Topbar';
 
 
 const baseURL = "http://127.0.0.1:8000/getProvinceOfDirectorEPI";
@@ -15,6 +15,7 @@ const baseURL = "http://127.0.0.1:8000/getProvinceOfDirectorEPI";
 
 const HCW_Admin_Registration = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [isSidebar, setIsSidebar] = useState(true);
 
   const [fullName, setfullName]=useState("");
   const [Email, setEmail]=useState("");
@@ -77,15 +78,16 @@ if (respons==200){
 
   return (
     <>
-    
-    <Director_EPI_Sidebar/>
+    <div className="app">
+    <Director_EPI_Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar}/>
     <div className="form">
     <Box m="20px">
       <Header title="CREATE Healthcare Worker Admin" subtitle="Create a Healthcare Worker Admin" />
 
       <Formik
         onSubmit={saveData}
-        validationSchema={checkoutSchema}
       >
         {({
           handleBlur,
@@ -180,24 +182,11 @@ if (respons==200){
       </Formik>
     </Box>
     </div>
+    </main>
+    </div>
     </>
   );
 };
-
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
-});
 
 
 export default HCW_Admin_Registration;
