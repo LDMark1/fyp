@@ -66,8 +66,10 @@ const Dashboard = () => {
    
   return (
     <>
-    <Topbar/>
+    <div className="app">
     <Sidebar isSidebar={isSidebar} />
+    <main className="content">
+    <Topbar setIsSidebar={setIsSidebar} />
     <div className="Dashboard">
     <Box m="20px">
       {/* HEADER */}
@@ -87,7 +89,7 @@ const Dashboard = () => {
         {/* ROW 1 */}
         <Box
           gridColumn="span 3"
-          gridRow={}
+          // gridRow={}
           backgroundColor={colors.primary[500]}
           display="flex"
           alignItems="center"
@@ -276,7 +278,8 @@ const Dashboard = () => {
       
         </Box>
       </Box>
-
+    </div>
+    </main>
     </div>
     </>
     );
