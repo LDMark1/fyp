@@ -15,11 +15,11 @@ import Topbar from "../../../scenes/global/Topbar";
 
 const baseURL = 'http://127.0.0.1:8000/countBirthRecord'
 const baseURL1 = 'http://127.0.0.1:8000/countvacr'
-const baseURL2 = 'http://127.0.0.1:8000/countVaccineAssignedToHospital'
+const baseURL2 = 'http://127.0.0.1:8000/getVaccineAssignedToHospitalForOS'
 const baseURL4 = "http://127.0.0.1:8000/savevac";
 
 
-const OS_Dashboard = () => {
+const OS_Dashboard = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isSidebar, setIsSidebar] = useState(true);
@@ -29,6 +29,13 @@ const OS_Dashboard = () => {
   const [vaccinesRecordCount, setvaccinesRecordCount] = useState(0);
   const [vaccinesCount, setvaccinesCount] = useState(0);
   const [vac, setvac] = useState([]);
+
+
+  useEffect(() => {
+    fetch(`${baseURL2}/?OS_Email=${props.Email}`)
+      .then((data) => data.json())
+      .then((data) => setvaccinesCount(data.count))
+  }, [])
 
   useEffect(() => {
     fetch(baseURL)
@@ -40,12 +47,6 @@ const OS_Dashboard = () => {
     fetch(baseURL1)
       .then((data) => data.json())
       .then((data) => setvaccinesRecordCount(data))
-  }, [])
-
-  useEffect(() => {
-    fetch(baseURL2)
-      .then((data) => data.json())
-      .then((data) => setvaccinesCount(data))
   }, [])
 
   useEffect(() => {

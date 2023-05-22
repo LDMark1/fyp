@@ -9,10 +9,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Topbar from "../../../scenes/global/Topbar";
 
-const baseURL = "http://127.0.0.1:8000/saveVaccineAssignedToHospital";
+const baseURL = "http://127.0.0.1:8000/getVaccineAssignedToHospitalForOS";
 
 
-const VaccineData_OS = () => {
+const VaccineData_OS = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableData, setTableData] = useState([]);
@@ -41,9 +41,9 @@ const VaccineData_OS = () => {
 
 
   useEffect(() => {
-    fetch(baseURL)
+    fetch(`${baseURL}/?OS_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setTableData(data))
+      .then((data) => setTableData(data.vaccine_records))
   }, [])
 
   const onRowsSelectionHandler = (ids) => {
@@ -53,7 +53,7 @@ const VaccineData_OS = () => {
   };
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "Vaccine ID", flex: 0.5},
+    { field: "assigned_vaccine_id", headerName: "Vaccine ID", flex: 0.5},
 
     {
       field: "hospitalName",

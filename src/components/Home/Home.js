@@ -1,7 +1,6 @@
 import './mainpage.css'
 import './ab.jpg'
 import './dc.jpg'
-import navLogo from "./logo4.png"
 import img2 from "./dc.jpg"
 import img3 from "./pp.jpg"
 import img4 from "./kk.jpg"
@@ -12,13 +11,8 @@ function HomePage() {
     
     return (
         <>
-
+    <div className='homePage'>
     <div class="site">
-        <nav>
-            {/* <img src={navLogo} class="logo" /> */}
-            
-          
-        </nav>
         <h1 class="title">Digitalized birth registration system and Vaccination management for Pakistan</h1>
         <div class="buttonMP">  
             <a className='space' href="/login">SIGNIN</a>
@@ -142,7 +136,7 @@ With our user-friendly online platform, parents can easily register their child'
     </p>
 </section>
 
-
+</div>
         </>
     )
    

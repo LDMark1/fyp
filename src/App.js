@@ -5,6 +5,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import {  addListener } from "./components/Login/login";
 import { respons } from "./components/Login/login";
+import HomePage from "./components/Home/Home";
 
 
 //Imports For Admin
@@ -156,7 +157,12 @@ function App() {
       <main className="content">
 
     <Routes>
-      {role === "normaluser" && <Route path="/" element={<Login />} />}
+      {role === "normaluser" && (
+      <>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<Login />} />
+      </>
+      )}
 
       {role === "admin" && (
         <>
@@ -233,20 +239,20 @@ function App() {
 
       {role === "OperatingStaff" && (
         <>
-          <Route path="/OS_Dashboard" element={<OS_Dashboard/>} />
+          <Route path="/OS_Dashboard" element={<OS_Dashboard Email={Email}/>} />
           <Route path="/OS_Vaccination_Record" element={<OS_Vaccination_Record Email={Email}/>} />
           <Route path="/OS_Birth_Record" element={<OS_Birth_Record Email={Email}/>} />
           <Route path="/OS_View_Birth_Records" element={<OS_View_Birth_Records/>} />
           <Route path="/OS_View_Vaccine_Records" element={<OS_View_Vaccine_Records/>} />
-          <Route path="/VaccineData_OS" element={<VaccineData_OS />} />
+          <Route path="/VaccineData_OS" element={<VaccineData_OS Email={Email}/>} />
         </>
       )}
 
       {role === "Parent" && (
         <>
-          <Route path="/parent_Dashboard" element={<Parent_Dashboard />} />
-          <Route path="/Parent_View_Birth_Records" element={<Parent_View_Birth_Records/>} />
-          <Route path="/Parent_View_Vaccine_Records" element={<Parent_View_Vaccine_Records/>} />
+          <Route path="/parent_Dashboard" element={<Parent_Dashboard Email={Email}/>} />
+          <Route path="/Parent_View_Birth_Records" element={<Parent_View_Birth_Records Email={Email}/>} />
+          <Route path="/Parent_View_Vaccine_Records" element={<Parent_View_Vaccine_Records Email={Email}/>} />
           <Route path="/FeedbackForm" element={<FeedbackForm Email={Email}/>} />
         </>
       )}

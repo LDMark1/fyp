@@ -8,10 +8,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Topbar from "../../../scenes/global/Topbar";
 
-const baseURL = "http://127.0.0.1:8000/savevacr";
+const baseURL = "http://127.0.0.1:8000/getVaccineRecordsforParent";
 
 
-const Parent_View_Vaccine_Records = () => {
+const Parent_View_Vaccine_Records = (props) => {
   const [isSidebar, setIsSidebar] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -20,10 +20,12 @@ const Parent_View_Vaccine_Records = () => {
 
 
   useEffect(() => {
-    fetch(baseURL)
-      .then((data) => data.json())
-      .then((data) => setTableData(data))
-  }, [])
+    if (props.Email) {
+      fetch(`${baseURL}/?Parent_Email=${props.Email}`)
+        .then((data) => data.json())
+        .then((data) => setTableData(data.vaccine_records))
+    }
+  }, [props.Email])
 
 
 

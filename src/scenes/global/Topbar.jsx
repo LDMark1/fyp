@@ -1,18 +1,35 @@
 import { Box, IconButton, useTheme } from "@mui/material";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ColorModeContext, tokens } from "../../theme";
 import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Topbar = () => {
+  const history = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const [temp, setTemp] = useState('')
+
+  const handleLogout = () => {
+    setTemp("normaluser")
+    sessionStorage.setItem("role", temp);
+  };
+
+  useEffect(() => {
+    if(temp==="normaluser")
+    {
+      history("../")
+      window.location.reload();
+    }
+  }, [temp])
 
   return (
     <>
@@ -43,18 +60,16 @@ const Topbar = () => {
             <LightModeOutlinedIcon />
           )}
         </IconButton>
-        <IconButton sx={{ color: '#555555' }}>
-          <NotificationsOutlinedIcon />
+
+        <IconButton onClick={handleLogout} sx={{ color: '#555555' }} >
+          <LogoutIcon />
         </IconButton>
-        <IconButton sx={{ color: '#555555' }}>
+
+        <IconButton sx={{ color: '#555555' }} >
           <SettingsOutlinedIcon />
-        </IconButton>
-        <IconButton sx={{ color: '#555555' }}>
-          <PersonOutlinedIcon />
         </IconButton>
       </Box>
     </Box>
-    <div className="vl"></div>
     </div>
     </>
   );

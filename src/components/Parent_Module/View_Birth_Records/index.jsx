@@ -8,10 +8,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Topbar from "../../../scenes/global/Topbar";
 
-const baseURL = "http://127.0.0.1:8000/saveBirthRecord";
+const baseURL = "http://127.0.0.1:8000/getBirthRecordsforParent";
 
 
-const Parent_View_Birth_Records = () => {
+const Parent_View_Birth_Records = (props) => {
   const [isSidebar, setIsSidebar] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -20,10 +20,12 @@ const Parent_View_Birth_Records = () => {
 
 
   useEffect(() => {
-    fetch(baseURL)
-      .then((data) => data.json())
-      .then((data) => setTableData(data))
-  }, [])
+    if (props.Email) {
+      fetch(`${baseURL}/?Parent_Email=${props.Email}`)
+        .then((data) => data.json())
+        .then((data) => setTableData(data.birthRecords))
+    }
+  }, [props.Email])
 
 
 
@@ -36,12 +38,6 @@ const Parent_View_Birth_Records = () => {
       headerName: "Father's CNIC",
       flex: 1,
       cellClassName: "name-column--cell",
-    },
-
-    {
-      field: "Mother_CNIC",
-      headerName: "Mother's CNIC",
-      flex: 1,
     },
     {
       field: "Gender",

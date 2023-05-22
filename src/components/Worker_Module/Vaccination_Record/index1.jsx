@@ -9,6 +9,7 @@ import axios from 'axios';
 import Topbar from '../../../scenes/global/Topbar';
 
 const baseURL = "http://127.0.0.1:8000/getHospitalIDofOS";
+const baseURL2 = "http://127.0.0.1:8000/getVaccineAssignedToHospitalForOS";
 
 const OS_Vaccination_Record = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -35,12 +36,11 @@ const OS_Vaccination_Record = (props) => {
   const history = useNavigate();
   var respons;
 
-
   useEffect(() => {
     if (props.Email) {
-      fetch(`${baseURL}/?OS_Email=${props.Email}`)
+      fetch(`${baseURL2}/?OS_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setHospital_ID(data.id))
+      .then((data) => setHospital_ID(data.vaccine_records.Hospital_ID))
     }
   }, [props.Email])
 
@@ -64,14 +64,12 @@ const OS_Vaccination_Record = (props) => {
   }, []);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/saveVaccineAssignedToHospital')
-      .then(response => {
-        setVaccineIDs(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+    if (props.Email) {
+      fetch(`${baseURL2}/?OS_Email=${props.Email}`)
+      .then((data) => data.json())
+      .then((data) => setVaccineIDs(data.vaccine_records))
+    }
+  }, [])
 
   const saveData = async(event) =>
 {

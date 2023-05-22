@@ -17,27 +17,21 @@ import Topbar from "../../../scenes/global/Topbar";
 
 const baseURL4 = "http://127.0.0.1:8000/savevac";
 
-const Parent_Dashboard = () => {
+const Parent_Dashboard = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isSidebar, setIsSidebar] = useState(true);
   const [vacRecord, setVacRecord] = useState(0);
   const [childRecord, setChildRecord] = useState(0)
   const [vac, setvac] = useState([]);
-  const baseURL = 'http://127.0.0.1:8000/countvacr'
-  const baseURL1 = 'http://127.0.0.1:8000/countBirthRecord'
+  const baseURL = 'http://127.0.0.1:8000/getVaccineRecordsforParent'
+  const baseURL1 = 'http://127.0.0.1:8000/getBirthRecordsforParent'
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(baseURL)
+    fetch(`${baseURL}/?Parent_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setVacRecord(data))
-  }, [])
-
-  useEffect(() => {
-    fetch(baseURL1)
-      .then((data) => data.json())
-      .then((data) => setChildRecord(data))
+      .then((data) => setVacRecord(data.count))
   }, [])
 
   useEffect(() => {
@@ -45,6 +39,14 @@ const Parent_Dashboard = () => {
       .then((data) => data.json())
       .then((data) => setvac(data))
   }, [])
+
+  useEffect(() => {
+    if (props.Email) {
+      fetch(`${baseURL1}/?Parent_Email=${props.Email}`)
+        .then((data) => data.json())
+        .then((data) => setChildRecord(data.count))
+    }
+  }, [props.Email])
 
   return (
     <>

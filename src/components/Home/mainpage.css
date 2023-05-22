@@ -4,7 +4,7 @@
 @import url('https://fonts.gstatic.com');
 @import url('https://fonts.googleapis.com');
 
-*{
+.homePage{
 
     margin: 0;
     padding: 0;
@@ -15,13 +15,13 @@
 .site{
     width: 100%;
     height: 100vh;
-    background-image:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(PIC.jpg);
+    background-image:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(pic3.jpg);
     background-size:  cover;
     background-position: center;
     position: relative;
 }
 
-nav{
+.homepage nav{
     position:absolute;
     top: 0;
     left: 0;
@@ -34,10 +34,10 @@ nav{
     
 }
 
-.navItems{
+.homepage .navItems{
     margin-top: -150px;
 }
-nav .logo {
+.homepage nav .logo {
     width: 200px;
     background: transparent !important;
 
@@ -47,19 +47,19 @@ nav .logo {
 
 }
 
-nav ul li{
+.homepage nav ul li{
     display: inline-block;
     list-style: none;
     margin: 5px 25px;
 
 }
-nav ul li a{
+.homepage nav ul li a{
     text-decoration: none;
     color: #ffff;
     
     
 }
-nav ul li a b:hover{
+.homepage nav ul li a b:hover{
     color: red;
 }
 
@@ -133,11 +133,11 @@ nav ul li a b:hover{
     text-align: center;
     padding-top: 100px;
 }
-h1{
+.homepage h1{
     font-size: 36px;
     font-weight: 600;
 }
-p{
+.homepage p{
     color: #777;
     font-size: 14px;
     font-weight: 300;
@@ -159,7 +159,7 @@ p{
     transition: 0.5s;
     color: black;
 }
-h3{
+.homepage h3{
     text-align: center;
     font-weight: 600;
     margin: 10px 0;
