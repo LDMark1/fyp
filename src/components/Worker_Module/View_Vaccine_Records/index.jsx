@@ -36,13 +36,13 @@ const OS_View_Vaccine_Records = () => {
       flex: 1,
     },
     {
-      field: "VaccineId",
-      headerName: "Vaccine ID",
+      field: "childName",
+      headerName: "Child Name",
       flex: 1,
     },
     {
-        field: "OS_Email",
-        headerName: "Registered By",
+        field: "vaccineName",
+        headerName: "Vaccine Name",
         flex: 2.5,
     },
     {
@@ -61,8 +61,8 @@ const OS_View_Vaccine_Records = () => {
     <div className='Contacts'>
     <Box m="20px">
       <Header
-        title="Birth Records"
-        subtitle="List of all the Birth Records saved in Database"
+        title="Vaccine Records"
+        subtitle="List of all the Vaccine Records saved in Database"
       />
       <Box
         m="40px 0 0 0"

@@ -38,12 +38,6 @@ const HCW_View_Birth_Records = () => {
       flex: 1,
       cellClassName: "name-column--cell",
     },
-
-    {
-      field: "Mother_CNIC",
-      headerName: "Mother's CNIC",
-      flex: 1,
-    },
     {
       field: "Gender",
       headerName: "Gender",

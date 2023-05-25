@@ -9,10 +9,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Topbar from "../../../scenes/global/Topbar";
 
-const baseURL = "http://127.0.0.1:8000/savehcw";
+const baseURL = "http://127.0.0.1:8000/getHCWforHCWA";
 
 
-const HCW_Data = () => {
+const HCW_Data = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableData, setTableData] = useState([]);
@@ -42,9 +42,9 @@ const HCW_Data = () => {
   }
 
   useEffect(() => {
-    fetch(baseURL)
+    fetch(`${baseURL}/?HCWA_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setTableData(data))
+      .then((data) => setTableData(data.hcw))
   }, [])
    
 

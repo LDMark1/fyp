@@ -49,7 +49,7 @@ const OS_Birth_Record = (props) => {
   const saveData = async(event) =>
 {
     event.preventDefault();
-    if(!Father_CNIC || !Contact  || !Mother_CNIC  || !Father_Email  || !access  || !OS_Email  || !Password)
+    if(!id || !fullName || !Father_Email || !Password || !Contact || !Father_CNIC || !Mother_CNIC || !Gender || !childWeight || !childLength || !deliveryType)
     {
       setError("Please fill all the fields!")
       return;

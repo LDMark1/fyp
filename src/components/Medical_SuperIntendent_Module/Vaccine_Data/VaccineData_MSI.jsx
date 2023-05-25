@@ -9,10 +9,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Topbar from "../../../scenes/global/Topbar";
 
-const baseURL = "http://127.0.0.1:8000/saveVaccineAssignedToHospital";
+const baseURL = "http://127.0.0.1:8000/getVaccAssignedToMSI";
 
 
-const VaccineData_MSI = () => {
+const VaccineData_MSI = (props) => {
   const [isSidebar, setIsSidebar] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -41,9 +41,9 @@ const VaccineData_MSI = () => {
 
 
   useEffect(() => {
-    fetch(baseURL)
+    fetch(`${baseURL}/?MSI_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setTableData(data))
+      .then((data) => setTableData(data.vaccine_records))
   }, [])
 
   const onRowsSelectionHandler = (ids) => {

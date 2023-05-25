@@ -9,10 +9,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Topbar from "../../../scenes/global/Topbar";
 
-const baseURL = "http://127.0.0.1:8000/saveHCWAdmin";
+const baseURL = "http://127.0.0.1:8000/getHCWA_ForDEPI";
 
 
-const HCW_Admin_Data = () => {
+const HCW_Admin_Data = (props) => {
   const [isSidebar, setIsSidebar] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -42,9 +42,9 @@ const HCW_Admin_Data = () => {
   }
 
   useEffect(() => {
-    fetch(baseURL)
+    fetch(`${baseURL}/?DEPI_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setTableData(data))
+      .then((data) => setTableData(data.HCWA))
   }, [])
    
 

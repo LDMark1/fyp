@@ -4,7 +4,7 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import VaccinesSharpIcon from '@mui/icons-material/VaccinesSharp';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../../Charts/Header";
-import LineChart from "../../Charts/LineChart";
+import LineChart from "../../Charts/LineChart3";
 import StatBox from "../../StatBox";
 import { useState, useEffect } from "react";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -13,40 +13,39 @@ import { useNavigate } from "react-router-dom";
 import Topbar from "../../../scenes/global/Topbar";
 
 
-const baseURL = 'http://127.0.0.1:8000/counthcw'
-const baseURL3 = "http://127.0.0.1:8000/countVaccineAssignedToHealthCareWorkerAdmin";
-const baseURL2 = 'http://127.0.0.1:8000/countVaccineAssignedToHCW'
+const baseURL = 'http://127.0.0.1:8000/getHCWforHCWA'
+const baseURL3 = "http://127.0.0.1:8000/getVaccineAssignedToHCWA";
+const baseURL2 = 'http://127.0.0.1:8000/getVaccAssignedToHCWforHCWA'
 const baseURL4 = "http://127.0.0.1:8000/savevac";
 
-const HCW_Admin_Dashboard = () => {
+const HCW_Admin_Dashboard = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isSidebar, setIsSidebar] = useState(true);
 
   const [AssignedVaccinesToHCW, setAssignedVaccinesToHCW] = useState(0);
   const [VaccinesCount, setVaccinesCount] = useState(0);
-  const [MSIsCount, setMSIsCount] = useState(0);
   const [EPIsCount, setEPIsCount] = useState(0);
   const [vac, setvac] = useState([]);
   const navigate = useNavigate();
   
   useEffect(() => {
-    fetch(baseURL)
+    fetch(`${baseURL}/?HCWA_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setEPIsCount(data))
+      .then((data) => setEPIsCount(data.count))
   }, [])
 
 
   useEffect(() => {
-    fetch(baseURL3)
+    fetch(`${baseURL3}/?HCWA_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setVaccinesCount(data))
+      .then((data) => setVaccinesCount(data.count))
   }, [])
 
   useEffect(() => {
-    fetch(baseURL2)
+    fetch(`${baseURL2}/?HCWA_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setAssignedVaccinesToHCW(data))
+      .then((data) => setAssignedVaccinesToHCW(data.count))
   }, [])
 
   useEffect(() => {
@@ -78,7 +77,7 @@ const HCW_Admin_Dashboard = () => {
         {/* ROW 1 */}
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[900]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -99,7 +98,7 @@ const HCW_Admin_Dashboard = () => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[600]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -121,7 +120,7 @@ const HCW_Admin_Dashboard = () => {
 
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[700]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -169,7 +168,7 @@ const HCW_Admin_Dashboard = () => {
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
+             
               </Typography>
             </Box>
             <Box>

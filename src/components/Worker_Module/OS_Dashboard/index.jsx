@@ -4,7 +4,7 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import VaccinesSharpIcon from '@mui/icons-material/VaccinesSharp';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../../Charts/Header";
-import LineChart from "../../Charts/LineChart";
+import LineChart from "../../Charts/LineChart6";
 import StatBox from "../../../components/StatBox";
 import { useState, useEffect } from "react";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -81,7 +81,7 @@ const OS_Dashboard = (props) => {
        
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[900]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -102,7 +102,7 @@ const OS_Dashboard = (props) => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[600]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -123,7 +123,7 @@ const OS_Dashboard = (props) => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[700]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -163,14 +163,14 @@ const OS_Dashboard = (props) => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Hospital Data
+                Vaccine Record Data
               </Typography>
               <Typography
                 variant="h3"
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
+              
               </Typography>
             </Box>
             <Box>

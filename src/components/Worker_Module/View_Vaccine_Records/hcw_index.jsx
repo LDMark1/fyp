@@ -59,8 +59,8 @@ const HCW_View_Vaccine_Records = () => {
     <div className='Contacts'>
     <Box m="20px">
       <Header
-        title="Birth Records"
-        subtitle="List of all the Birth Records saved in Database"
+        title="Vaccine Records"
+        subtitle="List of all the Vaccine Records saved in Database"
       />
       <Box
         m="40px 0 0 0"

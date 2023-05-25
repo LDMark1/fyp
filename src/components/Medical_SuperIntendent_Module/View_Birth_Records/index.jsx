@@ -11,7 +11,7 @@ import Topbar from "../../../scenes/global/Topbar";
 const baseURL = "http://127.0.0.1:8000/RetrieveBirthRecordsForMSI";
 
 
-const MSI_View_Birth_Records = () => {
+const MSI_View_Birth_Records = (props) => {
   const [isSidebar, setIsSidebar] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -20,9 +20,9 @@ const MSI_View_Birth_Records = () => {
 
 
   useEffect(() => {
-    fetch(baseURL)
+    fetch(`${baseURL}/?MSI_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setTableData(data))
+      .then((data) => setTableData(data.birth_records))
   }, [])
 
 

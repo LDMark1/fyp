@@ -14,8 +14,19 @@ import "react-pro-sidebar/dist/css/styles.css";
 import Parent_Sidebar from "../Parent_Sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import Topbar from "../../../scenes/global/Topbar";
-
+import images from "../../Home/doctor.png"
 const baseURL4 = "http://127.0.0.1:8000/savevac";
+const styles={
+  width:"50vh",height:"55vh",
+  marginLeft:"31.5vw",marginTop:"-41.5vh"
+}
+const styl = {
+  marginLeft: "5vw",
+  color: "white",
+  fontFamily: "Monaco, monospace",
+  marginTop:"10vh",
+  fontSize: "24px",
+};
 
 const Parent_Dashboard = (props) => {
   const theme = useTheme();
@@ -73,8 +84,8 @@ const Parent_Dashboard = (props) => {
         {/* ROW 1 */}
        
         <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          gridColumn="span 4"
+          backgroundColor={colors.primary[900]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -94,8 +105,8 @@ const Parent_Dashboard = (props) => {
           />
         </Box>
         <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          gridColumn="span 4"
+          backgroundColor={colors.primary[600]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -120,43 +131,11 @@ const Parent_Dashboard = (props) => {
         <Box
           gridColumn="span 8"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={"#48c3e7"}
           sx={{ borderRadius: '13px' }}
         >
-          <Box
-            mt="25px"
-            p="0 30px"
-            display="flex "
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-              >
-                Hospital Data
-              </Typography>
-              <Typography
-                variant="h3"
-                fontWeight="bold"
-                color={colors.greenAccent[500]}
-              >
-                $59,342.32
-              </Typography>
-            </Box>
-            <Box>
-              <IconButton>
-                <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                />
-              </IconButton>
-            </Box>
-          </Box>
-          <Box height="250px" m="-20px 0 0 0">
-            <LineChart isDashboard={true} />
-          </Box>
+          <div style={styl} >Protecting lives, one vaccine at<br/> a time. Visit us today and <br/> safeguard your future  health. <br/>Stay safe,  stay vaccinated.</div>
+        <img style={styles} src={images}/>
         </Box>
         <Box
           gridColumn="span 4"
@@ -211,69 +190,7 @@ const Parent_Dashboard = (props) => {
         </Box>
 
         {/* ROW 3 */}
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          p="30px"
-          sx={{ borderRadius: '13px' }}
-        >
-          <Typography variant="h5" fontWeight="600">
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography
-              variant="h5"
-              color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
-            >
-              $48,352 revenue generated
-            </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
-          </Box>
         </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          sx={{ borderRadius: '13px' }}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Sales Quantity
-          </Typography>
-          <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          padding="30px"
-          sx={{ borderRadius: '13px' }}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ marginBottom: "15px" }}
-          >
-            Geography Based Traffic
-          </Typography>
-          <Box height="200px">
-            <GeographyChart isDashboard={true} />
-          </Box>
-        </Box>
-      </Box>
     </Box>
     </div>
     </main>

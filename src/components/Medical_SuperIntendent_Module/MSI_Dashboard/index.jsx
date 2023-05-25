@@ -4,7 +4,7 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import VaccinesSharpIcon from '@mui/icons-material/VaccinesSharp';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../../Charts/Header";
-import LineChart from "../../Charts/LineChart";
+import LineChart from "../../Charts/LineChart4";
 import StatBox from "../../../components/StatBox";
 import { useState, useEffect } from "react";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -13,13 +13,13 @@ import { useNavigate } from "react-router-dom";
 import Topbar from "../../../scenes/global/Topbar";
 
 
-const baseURL = 'http://127.0.0.1:8000/countOperatingStaff'
-const baseURL1 = 'http://127.0.0.1:8000/countVaccineAssignedToHospital'
-const baseURL2 = 'http://127.0.0.1:8000/countRetrieveBirthRecordsForMSI'
+const baseURL = 'http://127.0.0.1:8000/RetrieveOperatingStaffForMSI'
+const baseURL1 = 'http://127.0.0.1:8000/getVaccAssignedToMSI'
+const baseURL2 = 'http://127.0.0.1:8000/RetrieveBirthRecordsForMSI'
 const baseURL4 = "http://127.0.0.1:8000/savevac";
 
 
-const MSI_Dashboard = () => {
+const MSI_Dashboard = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isSidebar, setIsSidebar] = useState(true);
@@ -31,22 +31,22 @@ const MSI_Dashboard = () => {
   const [vac, setvac] = useState([]);
   
   useEffect(() => {
-    fetch(baseURL)
+    fetch(`${baseURL}/?MSI_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setOperatingStaff(data))
+      .then((data) => setOperatingStaff(data.count))
   }, [])
 
   useEffect(() => {
-    fetch(baseURL1)
+    fetch(`${baseURL1}/?MSI_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setVaccine_Count(data))
+      .then((data) => setVaccine_Count(data.count))
   }, [])
 
 
   useEffect(() => {
-    fetch(baseURL2)
+    fetch(`${baseURL2}/?MSI_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setBirth_Records(data))
+      .then((data) => setBirth_Records(data.count))
   }, [])
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const MSI_Dashboard = () => {
        
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[900]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -103,7 +103,7 @@ const MSI_Dashboard = () => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[600]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -124,7 +124,7 @@ const MSI_Dashboard = () => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[700]}
           display="flex"
           alignItems="center"
           justifyContent="center"

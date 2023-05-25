@@ -8,10 +8,10 @@ import Topbar from "../../../scenes/global/Topbar";
 import React from "react";
 import { useState, useEffect } from "react";
 
-const baseURL = "http://127.0.0.1:8000/saveVaccineAssignedToHCW";
+const baseURL = "http://127.0.0.1:8000/getVaccineAssignedToHCW";
 
 
-const VaccineData_HCW = () => {
+const VaccineData_HCW = (props) => {
   const [isSidebar, setIsSidebar] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -21,9 +21,9 @@ const VaccineData_HCW = () => {
 
 
   useEffect(() => {
-    fetch(baseURL)
+    fetch(`${baseURL}/?HCW_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setTableData(data))
+      .then((data) => setTableData(data.vaccine_records))
   }, [])
 
 

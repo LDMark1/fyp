@@ -8,8 +8,9 @@ import HCW_Admin_Sidebar from '../HCW_Admin_Sidebar/Sidebar';
 import axios from 'axios';
 import Topbar from '../../../scenes/global/Topbar';
 
-const baseURL = "http://127.0.0.1:8000/getRegionOf_HCWA";
-const baseURL1 = "http://127.0.0.1:8000/get_HCW_For_HCWA";
+// const baseURL = "http://127.0.0.1:8000/getRegionOf_HCWA";
+// const baseURL1 = "http://127.0.0.1:8000/get_HCW_For_HCWA";
+const baseURL1 = "http://127.0.0.1:8000/getHCWforHCWA";
 
 const HCW_Vaccination_Assignment = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -35,28 +36,28 @@ const HCW_Vaccination_Assignment = (props) => {
   var respons;
 
   useEffect(() => {
-    if (props.Email) {
+    if (props.Email && selectedVaccineIDs && selectedHCWIDs) {
       fetch(`http://127.0.0.1:8000/CheckAssignmentViewForHCW/?assigned_vaccine_id=${selectedVaccineIDs}&HCW_ID=${selectedHCWIDs}`)
         .then((data) => data.json())
         .then((data) => setCheck(data))
     }
   }, [selectedVaccineIDs, selectedHCWIDs])
 console.log(check)
-  useEffect(() => {
-    if (props.Email) {
-      fetch(`${baseURL}/?email=${props.Email}`)
-      .then((data) => data.json())
-      .then((data) => setRegion(data))
-    }
-  }, [props.Email])
+  // useEffect(() => {
+  //   if (props.Email) {
+  //     fetch(`${baseURL}/?email=${props.Email}`)
+  //     .then((data) => data.json())
+  //     .then((data) => setRegion(data))
+  //   }
+  // }, [props.Email])
 
   useEffect(() => {
-    if (region) {
-      fetch(`${baseURL1}/?region=${region}`)
+    if (props.Email) {
+      fetch(`${baseURL1}/?HCWA_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setHCWIDs(data))
+      .then((data) => setHCWIDs(data.hcw))
     }
-  }, [region])
+  }, [props.Email])
 
   useEffect(() => {
     axios.get('http://127.0.0.1:8000/saveVaccineAssignedToHealthCareWorkerAdmin')
@@ -71,6 +72,8 @@ console.log(check)
     setError("")
     };
   useEffect(() => {
+    if(selectedVaccineIDs && props.Email)
+    {
     axios.get(`http://127.0.0.1:8000/getVacForHCWA/?assigned_vaccine_id=${selectedVaccineIDs}&HCWA_Email=${props.Email}`)
       .then(response => {
         setQuantityInStock(response.data[0].Vaccine_Quantity)
@@ -78,14 +81,20 @@ console.log(check)
       .catch(error => {
         console.log(error);
       });
+    }
   }, [selectedVaccineIDs]);
   
   const saveData = async(event) =>
 {
     event.preventDefault()
-    if(!selectedHCWIDs || !selectedVaccineIDs || !QuantityInStock)
+    if(!selectedHCWIDs || !selectedVaccineIDs)
     {
       setError("Please fill all the fields!")
+      return;
+    }
+    if(QuantityInStock<=0)
+    {
+      setError("No vaccine available to allot")
       return;
     }
     let QuantityInHCWStock;
@@ -107,6 +116,7 @@ console.log(check)
         })
         if(QuantityInStock-Vaccine_Quantity >= 0)
       {
+        console.log(QuantityInStock-Vaccine_Quantity)
         formField.append('newQuantity', parseInt(QuantityInHCWStock) + parseInt(Vaccine_Quantity));
         formField.append('oldQuantity', parseInt(QuantityInStock) - parseInt(Vaccine_Quantity));
         await axios({
@@ -128,6 +138,10 @@ console.log(check)
       }
     }
     let formField = new FormData()
+    if(QuantityInStock-Vaccine_Quantity >= 0)
+    {
+
+    
     formField.append('assigned_vaccine_id',selectedVaccineIDs)
     formField.append('HCW_ID',selectedHCWIDs)
     formField.append('Vaccine_Quantity',Vaccine_Quantity)
@@ -147,6 +161,10 @@ if (respons==200){
    else{ 
     history("/signup")
 }
+  }
+  else{
+    setError("Assignment Quantity exceeds quantity in stock")
+  }
 }
 
   return (

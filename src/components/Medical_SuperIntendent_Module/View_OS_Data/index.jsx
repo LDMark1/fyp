@@ -9,10 +9,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Topbar from "../../../scenes/global/Topbar";
 
-const baseURL = "http://127.0.0.1:8000/saveOperatingStaff";
+const baseURL = "http://127.0.0.1:8000/RetrieveOperatingStaffForMSI";
 
 
-const OS_Data = () => {
+const OS_Data = (props) => {
   const [isSidebar, setIsSidebar] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -40,9 +40,9 @@ const OS_Data = () => {
   }
 
   useEffect(() => {
-    fetch(baseURL)
+    fetch(`${baseURL}/?MSI_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setTableData(data))
+      .then((data) => setTableData(data.operating_staff))
   }, [])
    
 

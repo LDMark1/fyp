@@ -40,7 +40,7 @@ const OS_Vaccination_Record = (props) => {
     if (props.Email) {
       fetch(`${baseURL2}/?OS_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setHospital_ID(data.vaccine_records.Hospital_ID))
+      .then((data) => setHospital_ID(data.vaccine_records[0].Hospital_ID))
     }
   }, [props.Email])
 
@@ -76,6 +76,7 @@ const OS_Vaccination_Record = (props) => {
     event.preventDefault();
     if(!selectedchildIDs || !selectedVaccineIDs  || !Vaccine_Description  || !OS_Email  || !Hospital_ID)
     {
+      console.log(selectedchildIDs, selectedVaccineIDs, Vaccine_Description, OS_Email, Hospital_ID )
       setError("Please fill all the fields!")
       return;
     }

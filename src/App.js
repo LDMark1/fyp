@@ -183,14 +183,13 @@ function App() {
         <>
           <Route path="/Director_EPI_Dashboard" element={<Director_EPI_Dashboard Email={Email}/>} />
           <Route path="/HCW_Admin_Registration" element={<HCW_Admin_Registration Email={Email} />} />
-          <Route path="/HCW_Assigned_Vaccines" element={<HCW_Assigned_Vaccines />} />
           <Route path="/Hospital_Vaccination_Assignment" element={<Hospital_Vaccination_Assignment Email={Email} />} />
           <Route path="/HospitalData_EPI" element={<HospitalData_EPI Email={Email}/>} />
           <Route path="/VaccineData_EPI" element={<VaccineData_EPI Email={Email}/>} />
-          <Route path="/HCW_Admin_Data" element={<HCW_Admin_Data />} />
+          <Route path="/HCW_Admin_Data" element={<HCW_Admin_Data Email={Email}/>} />
           <Route path="/HCW_Admin_Vaccine_Assignment" element={<HCW_Admin_Vaccination_Assignment Email={Email} />} />
-          <Route path="/HCWA_Assigned_Vaccines" element={<HCWA_Assigned_Vaccines />} />
-          <Route path="/VaccinesAssignedToHospital" element={<VaccinesAssignedToHospital />} />
+          <Route path="/HCWA_Assigned_Vaccines" element={<HCWA_Assigned_Vaccines Email={Email}/>} />
+          <Route path="/VaccinesAssignedToHospital" element={<VaccinesAssignedToHospital Email={Email}/>} />
         </>
       )}
 
@@ -207,36 +206,36 @@ function App() {
 
       {role === "HealthCareWorkerAdmin" && (
         <>
-          <Route path="/HCW_Admin_Dashboard" element={<HCW_Admin_Dashboard />} />
+          <Route path="/HCW_Admin_Dashboard" element={<HCW_Admin_Dashboard Email={Email}/>} />
           <Route path="/HCW_Registration" element={<HCW_Registration Email={Email} />} />
-          <Route path="/HCWA_Alloted_Vaccines" element={<HCWA_Alloted_Vaccines />} />
-          <Route path="/HCW_Data" element={<HCW_Data />} />
+          <Route path="/HCWA_Alloted_Vaccines" element={<HCWA_Alloted_Vaccines Email={Email} />} />
+          <Route path="/HCW_Data" element={<HCW_Data Email={Email}/>} />
           <Route path="/HCW_Vaccination_Assignment" element={<HCW_Vaccination_Assignment Email={Email}/>} />
-          <Route path="/Vaccines_Assigned_To_HCW" element={<Vaccines_Assigned_To_HCW/>} />
+          <Route path="/Vaccines_Assigned_To_HCW" element={<Vaccines_Assigned_To_HCW Email={Email}/>} />
         </>
       )}
 
       {role === "MedicalSuperIntendent" && (
         <>
-          <Route path="/MSI_Dashboard" element={<MSI_Dashboard />} />
+          <Route path="/MSI_Dashboard" element={<MSI_Dashboard Email={Email} />} />
           <Route path="/OS_Registration" element={<OS_Registration Email={Email}/>} />
-          <Route path="/VaccineData_MSI" element={<VaccineData_MSI />} />
-          <Route path="/OS_Data" element={<OS_Data />} />
-          <Route path="/MSI_View_Birth_Records" element={<MSI_View_Birth_Records />} />
+          <Route path="/VaccineData_MSI" element={<VaccineData_MSI Email={Email}/>} />
+          <Route path="/OS_Data" element={<OS_Data Email={Email}/>} />
+          <Route path="/MSI_View_Birth_Records" element={<MSI_View_Birth_Records Email={Email}/>} />
         </>
       )}
 
       {role === "HealthCareWorker" && (
         <>
-          <Route path="/HCW_Dashboard" element={<HCW_Dashboard/>} />
+          <Route path="/HCW_Dashboard" element={<HCW_Dashboard Email={Email}/>} />
           <Route path="/HCW_Vaccination_Record" element={<HCW_Vaccination_Record Email={Email}/>} />
           <Route path="/HCW_Birth_Record" element={<HCW_Birth_Record Email={Email}/>} />
           <Route path="/HCW_View_Birth_Records" element={<HCW_View_Birth_Records/>} />
-          <Route path="/HCW_View_Vaccine_Records" element={<HCW_View_Vaccine_Records/>} />
-          <Route path="/VaccineData_HCW" element={<VaccineData_HCW />} />
+          <Route path="/HCW_View_Vaccine_Records" element={<HCW_View_Vaccine_Records Email={Email}/>} />
+          <Route path="/VaccineData_HCW" element={<VaccineData_HCW Email={Email}/>} />
         </>
       )}
-
+{/* os remaining */}
       {role === "OperatingStaff" && (
         <>
           <Route path="/OS_Dashboard" element={<OS_Dashboard Email={Email}/>} />

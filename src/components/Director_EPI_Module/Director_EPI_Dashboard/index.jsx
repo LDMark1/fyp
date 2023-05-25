@@ -5,7 +5,7 @@ import LocalHospitalSharpIcon from '@mui/icons-material/LocalHospitalSharp';
 import VaccinesSharpIcon from '@mui/icons-material/VaccinesSharp';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../../Charts/Header";
-import LineChart from "../../Charts/LineChart";
+import LineChart from "../../Charts/LineChart1";
 import StatBox from "../../StatBox";
 import { useState, useEffect } from "react";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -14,10 +14,10 @@ import { useNavigate } from "react-router-dom";
 import Topbar from "../../../scenes/global/Topbar";
 
 
-const baseURL = 'http://127.0.0.1:8000/countHealthCareWorkerAdmins'
+const baseURL = 'http://127.0.0.1:8000/getHCWA_ForDEPI'
 const baseURL1 = 'http://127.0.0.1:8000/countHospitalForDirectorEPI'
-const baseURL2 = "http://127.0.0.1:8000/countVaccineAssignedToHealthCareWorkerAdmin"; 
-const baseURL3 = "http://127.0.0.1:8000/countVaccineAssignedToHospital"; 
+const baseURL2 = "http://127.0.0.1:8000/getVaccinesAssignedToHCWA_ForDEPI"; 
+const baseURL3 = "http://127.0.0.1:8000/getVaccinesAssignedToHospital"; 
 const baseURL4 = "http://127.0.0.1:8000/savevac";
 
 const Director_EPI_Dashboard = (props) => {
@@ -41,9 +41,9 @@ const Director_EPI_Dashboard = (props) => {
   }, [props.Email])
 
   useEffect(() => {
-    fetch(baseURL)
+    fetch(`${baseURL}/?DEPI_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setHCWsCount(data))
+      .then((data) => setHCWsCount(data.count))
   }, [])
 
 
@@ -54,15 +54,15 @@ const Director_EPI_Dashboard = (props) => {
   }, [])
 
   useEffect(() => {
-    fetch(baseURL2)
+    fetch(`${baseURL2}/?DEPI_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setVaccinesCount(data))
+      .then((data) => setVaccinesCount(data.count))
   }, [])
 
   useEffect(() => {
-    fetch(baseURL3)
+   fetch(`${baseURL3}/?DEPI_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setVaccinesCountForHospital(data))
+      .then((data) => setVaccinesCountForHospital(data.count))
   }, [])
 
 
@@ -92,7 +92,7 @@ const Director_EPI_Dashboard = (props) => {
         {/* ROW 1 */}
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[900]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -113,7 +113,7 @@ const Director_EPI_Dashboard = (props) => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[600]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -134,7 +134,7 @@ const Director_EPI_Dashboard = (props) => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[700]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -155,7 +155,7 @@ const Director_EPI_Dashboard = (props) => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[800]}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -202,7 +202,6 @@ const Director_EPI_Dashboard = (props) => {
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
               </Typography>
             </Box>
             <Box>

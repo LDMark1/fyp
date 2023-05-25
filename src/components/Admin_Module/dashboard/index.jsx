@@ -85,7 +85,7 @@ const Dashboard = () => {
         <Box
           gridColumn="span 3"
           // gridRow={}
-          backgroundColor={colors.primary[500]}
+          backgroundColor={colors.primary[900]}
           display="flex"
           alignItems="center"
           justifyContent="center"

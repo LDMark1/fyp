@@ -37,9 +37,9 @@ const HCW_Vaccination_Record = (props) => {
   }, []);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/saveVaccineAssignedToHCW')
+    axios.get(`http://127.0.0.1:8000/vaccinesForHCW/?HCW_Email=${props.Email}`)
       .then(response => {
-        setVaccineIDs(response.data);
+        setVaccineIDs(response.data.records);
       })
       .catch(error => {
         console.log(error);

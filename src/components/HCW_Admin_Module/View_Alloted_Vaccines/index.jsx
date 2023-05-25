@@ -8,21 +8,20 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Topbar from "../../../scenes/global/Topbar";
 
-const baseURL = "http://127.0.0.1:8000/saveVaccineAssignedToHealthCareWorkerAdmin";
+const baseURL = "http://127.0.0.1:8000/getVaccineAssignedToHCWA";
 
 
-const HCWA_Alloted_Vaccines = () => {
+const HCWA_Alloted_Vaccines = (props) => {
   const theme = useTheme();
   const [isSidebar, setIsSidebar] = useState(true);
 
   const colors = tokens(theme.palette.mode);
   const [tableData, setTableData] = useState([]);
   useEffect(() => {
-    fetch(baseURL)
+    fetch(`${baseURL}/?HCWA_Email=${props.Email}`)
       .then((data) => data.json())
-      .then((data) => setTableData(data))
+      .then((data) => setTableData(data.vaccine_records))
   }, [])
-   console.log(tableData)
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "Serial#", flex: 0.5, editable: true, valueParser: (value: GridCellValue, params: GridCellParams) => {
