@@ -1,14 +1,9 @@
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import VaccinesSharpIcon from '@mui/icons-material/VaccinesSharp';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../../Charts/Header";
-import LineChart from "../../Charts/LineChart";
-import GeographyChart from "../../Charts/GeographyChart";
-import BarChart from "../../Charts/BarChart";
 import StatBox from "../../StatBox";
-import ProgressCircle from "../../Charts/ProgressCircle";
 import { useState, useEffect } from "react";
 import "react-pro-sidebar/dist/css/styles.css";
 import Parent_Sidebar from "../Parent_Sidebar/Sidebar";
@@ -34,10 +29,18 @@ const Parent_Dashboard = (props) => {
   const [isSidebar, setIsSidebar] = useState(true);
   const [vacRecord, setVacRecord] = useState(0);
   const [childRecord, setChildRecord] = useState(0)
+  const [futureVacRecords, setFutureVacRecords] = useState(0)
   const [vac, setvac] = useState([]);
   const baseURL = 'http://127.0.0.1:8000/getVaccineRecordsforParent'
   const baseURL1 = 'http://127.0.0.1:8000/getBirthRecordsforParent'
+  const baseURL2 = 'http://127.0.0.1:8000/GetFutureVaccinesForParent'
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch(`${baseURL2}/?Parent_Email=${props.Email}`)
+      .then((data) => data.json())
+      .then((data) => setFutureVacRecords(data.count))
+  }, [])
 
   useEffect(() => {
     fetch(`${baseURL}/?Parent_Email=${props.Email}`)
@@ -125,7 +128,28 @@ const Parent_Dashboard = (props) => {
             }
           />
         </Box>
-        
+
+        <Box
+          gridColumn="span 4"
+          backgroundColor={colors.primary[600]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ borderRadius: '13px' }}
+          onClick={()=> navigate("/Future_VaccineData_Parent")}
+        >
+          <StatBox
+            title={futureVacRecords.toLocaleString('en-US')}
+            subtitle="Upcoming Vaccination Records"
+            progress="0.30"
+            increase="+5%"
+            icon={
+              <PersonAddIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </Box>
 
         {/* ROW 2 */}
         <Box

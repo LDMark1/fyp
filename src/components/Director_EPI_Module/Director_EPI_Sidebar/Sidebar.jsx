@@ -8,7 +8,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import LocalHospitalSharpIcon from '@mui/icons-material/LocalHospitalSharp';
+// import LocalHospitalSharpIcon from '@mui/icons-material/LocalHospitalSharp';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();

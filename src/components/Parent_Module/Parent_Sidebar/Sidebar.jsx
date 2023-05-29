@@ -5,17 +5,10 @@ import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import VaccinesSharpIcon from '@mui/icons-material/VaccinesSharp';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -137,7 +130,7 @@ const Parent_Sidebar = () => {
             <Item
               title="View Vaccination Record"
               to="/Parent_View_Vaccine_Records"
-              icon={<PersonOutlinedIcon />}
+              icon={<VaccinesSharpIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -146,6 +139,14 @@ const Parent_Sidebar = () => {
               title="View Birth Record"
               to="/Parent_View_Birth_Records"
               icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
+              title="Upcoming Vaccinations"
+              to="/Future_VaccineData_Parent"
+              icon={<VaccinesSharpIcon />}
               selected={selected}
               setSelected={setSelected}
             />

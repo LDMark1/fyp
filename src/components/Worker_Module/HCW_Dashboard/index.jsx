@@ -24,8 +24,22 @@ const HCW_Dashboard = (props) => {
   const [VaccinesCount, setVaccinesCount] = useState(0);
   const [VacRecordsCount, setVacRecordsCount] = useState(0);
   const [BirthRecordsCount, setBirthRecordsCount] = useState(0);
+  const [FutureRecordsCount, setFutureRecordsCount] = useState(0);
   const [vac, setvac] = useState([]);
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/GetFutureVaccinesForHCW/?HCW_Email=${props.Email}`);
+        const data = await response.json();
+        setFutureRecordsCount(data.count);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     fetch(`${baseURL2}/?HCW_Email=${props.Email}`)
@@ -134,6 +148,28 @@ const HCW_Dashboard = (props) => {
             increase="+43%"
             icon={
               <PersonAddIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </Box>
+
+        <Box
+          gridColumn="span 3"
+          backgroundColor={colors.primary[700]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ borderRadius: '13px' }}
+          onClick={()=> navigate("/Future_VaccineData_HCW")}
+        >
+          <StatBox
+            title={FutureRecordsCount.toLocaleString("en-US")}
+            subtitle="Future Vaccine Records"
+            progress="0.80"
+            increase="+43%"
+            icon={
+              <VaccinesSharpIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }

@@ -29,6 +29,13 @@ const OS_Dashboard = (props) => {
   const [vaccinesRecordCount, setvaccinesRecordCount] = useState(0);
   const [vaccinesCount, setvaccinesCount] = useState(0);
   const [vac, setvac] = useState([]);
+  const [FutureVac, setFutureVac] = useState(0);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/CountFutureVaccines')
+      .then((data) => data.json())
+      .then((data) => setFutureVac(data))
+  }, [])
 
 
   useEffect(() => {
@@ -133,6 +140,27 @@ const OS_Dashboard = (props) => {
           <StatBox
             title={birthRecordCount.toLocaleString("en-US")}
             subtitle="Birth Records"
+            progress="0.80"
+            increase="+43%"
+            icon={
+              <PersonAddIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </Box>
+        <Box
+          gridColumn="span 3"
+          backgroundColor={colors.primary[700]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ borderRadius: '13px' }}
+          onClick={()=> navigate("/View_Future_Vaccines_OS")}
+        >
+          <StatBox
+            title={FutureVac.toLocaleString("en-US")}
+            subtitle="Future Vaccine Records"
             progress="0.80"
             increase="+43%"
             icon={

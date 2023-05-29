@@ -30,6 +30,7 @@ const OS_Vaccination_Record = (props) => {
 
 
   const [Hospital_ID, setHospital_ID] = useState("")
+  
 
 
   const OS_Email = props.Email
@@ -81,14 +82,15 @@ const OS_Vaccination_Record = (props) => {
       return;
     }
     let QuantityInHospitalStock;
-    console.log(selectedchildIDs)
-    console.log(selectedVaccineIDs)
+    const temp_date = new Date();
+    const date = temp_date.toLocaleString();
     let formField = new FormData()
     formField.append('childId',selectedchildIDs)
     formField.append('VaccineId',selectedVaccineIDs)
     formField.append('Description',Vaccine_Description)
     formField.append('RegisteredBy',OS_Email)
     formField.append('hospital_id',Hospital_ID)
+    formField.append('vaccination_Time',date)
          await axios({
           method: 'post',
           url:'http://127.0.0.1:8000/savevacr',

@@ -62,6 +62,7 @@ import HCW_Birth_Record from "./components/Worker_Module/Birth_Record";
 import HCW_View_Birth_Records from "./components/Worker_Module/View_Birth_Records/hcw_index";
 import HCW_View_Vaccine_Records from "./components/Worker_Module/View_Vaccine_Records/hcw_index";
 import VaccineData_HCW from "./components/Worker_Module/Vaccine_Data/VaccineData_HCW";
+import Future_VaccineData_HCW from "./components/Worker_Module/view_future_vaccines/index1";
 
 //Imports For Operating Staff
 import OS_Dashboard from "./components/Worker_Module/OS_Dashboard";
@@ -70,6 +71,8 @@ import OS_Birth_Record from "./components/Worker_Module/Birth_Record/index1";
 import OS_View_Birth_Records from "./components/Worker_Module/View_Birth_Records";
 import OS_View_Vaccine_Records from "./components/Worker_Module/View_Vaccine_Records";
 import VaccineData_OS from "./components/Worker_Module/Vaccine_Data/VaccineData_OS";
+import Adding_Future_Vaccines from "./components/Worker_Module/future_vaccines/future_vaccines";
+import View_Future_Vaccines_OS from "./components/Worker_Module/view_future_vaccines";
 
 
 //Imports For Parents
@@ -77,6 +80,8 @@ import Parent_Dashboard from "./components/Parent_Module/Parent_Dashboard";
 import Parent_View_Birth_Records from "./components/Parent_Module/View_Birth_Records";
 import Parent_View_Vaccine_Records from "./components/Parent_Module/View_Vaccine_Records";
 import FeedbackForm from "./components/Parent_Module/Parent_Feedback/feedback";
+import Future_VaccineData_Parent from "./components/Parent_Module/View_Future_Vaccines/index1";
+
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -233,6 +238,7 @@ function App() {
           <Route path="/HCW_View_Birth_Records" element={<HCW_View_Birth_Records/>} />
           <Route path="/HCW_View_Vaccine_Records" element={<HCW_View_Vaccine_Records Email={Email}/>} />
           <Route path="/VaccineData_HCW" element={<VaccineData_HCW Email={Email}/>} />
+          <Route path="/Future_VaccineData_HCW" element={<Future_VaccineData_HCW Email={Email}/>} />
         </>
       )}
 {/* os remaining */}
@@ -244,6 +250,8 @@ function App() {
           <Route path="/OS_View_Birth_Records" element={<OS_View_Birth_Records/>} />
           <Route path="/OS_View_Vaccine_Records" element={<OS_View_Vaccine_Records/>} />
           <Route path="/VaccineData_OS" element={<VaccineData_OS Email={Email}/>} />
+          <Route path="/Adding_Future_Vaccines" element={<Adding_Future_Vaccines Email={Email}/>} />
+          <Route path="/View_Future_Vaccines_OS" element={<View_Future_Vaccines_OS />} />
         </>
       )}
 
@@ -253,6 +261,7 @@ function App() {
           <Route path="/Parent_View_Birth_Records" element={<Parent_View_Birth_Records Email={Email}/>} />
           <Route path="/Parent_View_Vaccine_Records" element={<Parent_View_Vaccine_Records Email={Email}/>} />
           <Route path="/FeedbackForm" element={<FeedbackForm Email={Email}/>} />
+          <Route path="/Future_VaccineData_Parent" element={<Future_VaccineData_Parent Email={Email}/>} />
         </>
       )}
       

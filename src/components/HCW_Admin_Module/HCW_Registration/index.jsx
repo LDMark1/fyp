@@ -22,6 +22,7 @@ const HCW_Registration = (props) => {
   const [Contact, setContact]=useState("");
   const [id, setid]=useState("");
   const [region, setRegion] = useState("");
+  const [city, setCity] = useState("");
   const HCWA_Email = props.Email
   const history = useNavigate();
   let access = 'HealthCareWorker';
@@ -40,7 +41,7 @@ const HCW_Registration = (props) => {
     setError("")
     };
   const saveData = async(event) =>
-{ event.preventDefault();if(!Email || !Password || !fullName || !Contact || !Password || !id || !HCWA_Email || !region || !access)
+{ event.preventDefault();if(!Email || !Password || !fullName || !Contact || !Password || !id || !HCWA_Email || !region || !city)
   {
     setError("Please fill all the fields!")
     return;
@@ -54,6 +55,7 @@ const HCW_Registration = (props) => {
     formField.append('id',id)
     formField.append('HCWA_Email',HCWA_Email)
     formField.append('region',region)
+    formField.append('city',city)
     formField.append('access',access)
          await axios({
           method: 'post',
@@ -154,7 +156,20 @@ if (respons==200){
                 name="Contact"
                 // error={!!touched.contact && !!errors.contact}
                 // helperText={touched.contact && errors.contact}
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="City"
+                onBlur={handleBlur}
+                onChange={(e)=>{setCity(e.target.value);  anotherFunction();}}
+                value={city}
+                name="Contact"
+                // error={!!touched.contact && !!errors.contact}
+                // helperText={touched.contact && errors.contact}
+                sx={{ gridColumn: "span 2" }}
               />
               <TextField
                 fullWidth

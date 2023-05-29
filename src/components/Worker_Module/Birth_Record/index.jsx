@@ -20,6 +20,8 @@ const HCW_Birth_Record = (props) => {
   const [Father_CNIC, setFather_CNIC]=useState("");
   const [Mother_CNIC, setMother_CNIC]=useState("");
   const [Gender, setGender]=useState("");
+  const [City, setCity]=useState("");
+  const [Address, setAddress]=useState("");
   const [error,setError]=useState("");
   const HCW_Email = props.Email
   let access = 'Parent'
@@ -33,7 +35,7 @@ const HCW_Birth_Record = (props) => {
   const saveData = async(event) =>
 {
     event.preventDefault()
-    if(!id || !fullName || !date || !HCW_Email || !Gender || !Father_CNIC)
+    if(!id || !fullName || !date || !HCW_Email || !Gender || !Father_CNIC || !City || !Address)
     {
       setError("Please fill all the fields!")
       return;
@@ -70,6 +72,8 @@ const HCW_Birth_Record = (props) => {
     formField.append("Contact", Contact)
     formField.append("Mother_CNIC", Mother_CNIC)
     formField.append("Father_Email", Father_Email)
+    formField.append("Address", Address)
+    formField.append("City", City)
     formField.append("Password", Password)
     formField.append("access", access)
          await axios({
@@ -192,6 +196,28 @@ if (respons==200){
                 fullWidth
                 variant="filled"
                 type="text"
+                label="City"
+                onBlur={handleBlur}
+                onChange={(e)=>{setCity(e.target.value);  anotherFunction();}}
+                value={City}
+                name="City"
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Address"
+                onBlur={handleBlur}
+                onChange={(e)=>{setAddress(e.target.value);  anotherFunction();}}
+                value={Address}
+                name="Address"
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
                 label="Father CNIC"
                 onBlur={handleBlur}
                 onChange={(e)=>{setFather_CNIC(e.target.value);  anotherFunction();}}
@@ -214,7 +240,7 @@ if (respons==200){
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Gender"
+                label="Child Gender"
                 onBlur={handleBlur}
                 onChange={(e)=>{setGender(e.target.value);  anotherFunction();}}
                 value={Gender}

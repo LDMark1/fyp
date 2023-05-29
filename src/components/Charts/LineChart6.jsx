@@ -2,7 +2,6 @@ import { ResponsiveLine } from "@nivo/line";
 import { useState,useEffect } from "react";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import axios from "axios";
 
 const baseURL3 = "http://127.0.0.1:8000/OPdashboard/";
 

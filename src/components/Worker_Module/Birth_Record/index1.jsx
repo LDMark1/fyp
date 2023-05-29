@@ -6,7 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Charts/Header";
 import OS_Sidebar from "../OS_Sidebar/Sidebar";
 import axios from 'axios';
-import Topbar from '../../../scenes/global/Topbar';
+// import Topbar from '../../../scenes/global/Topbar';
 
 const baseURL = "http://127.0.0.1:8000/getHospitalIDofOS";
 
@@ -27,6 +27,8 @@ const OS_Birth_Record = (props) => {
   const [Father_CNIC, setFather_CNIC]=useState("");
   const [Mother_CNIC, setMother_CNIC]=useState("");
   const [Gender, setGender]=useState("");
+  const [City, setCity]=useState("");
+  const [Address, setAddress]=useState("");
   const [childWeight, setchildWeight]=useState("");
   const [childLength, setchildLength]=useState("");
   const [deliveryType, setdeliveryType]=useState("");
@@ -49,7 +51,7 @@ const OS_Birth_Record = (props) => {
   const saveData = async(event) =>
 {
     event.preventDefault();
-    if(!id || !fullName || !Father_Email || !Password || !Contact || !Father_CNIC || !Mother_CNIC || !Gender || !childWeight || !childLength || !deliveryType)
+    if(!id || !fullName || !Father_Email || !Password || !Contact || !Father_CNIC || !Mother_CNIC || !Gender || !childWeight || !childLength || !deliveryType || !City || !Address)
     {
       setError("Please fill all the fields!")
       return;
@@ -58,6 +60,8 @@ const OS_Birth_Record = (props) => {
     let formField = new FormData()
     formField.append("id",Father_CNIC)
     formField.append("Contact", Contact)
+    formField.append("Address", Address)
+    formField.append("City", City)
     formField.append("Mother_CNIC", Mother_CNIC)
     formField.append("Father_Email", Father_Email)
     formField.append("Password", Password)
@@ -107,7 +111,7 @@ if (respons==200){
    <div className="app">
     <OS_Sidebar isSidebar={isSidebar} />
     <main className="content">
-    <Topbar setIsSidebar={setIsSidebar} />
+    {/* <Topbar setIsSidebar={setIsSidebar} /> */}
     <div className="form">
     <Box m="20px">
       <Header title="ADD Birth Record" subtitle="Add a New Birth Record" />
@@ -206,6 +210,28 @@ if (respons==200){
                 onChange={(e)=>{setMother_CNIC(e.target.value); anotherFunction();}}
                 value={Mother_CNIC}
                 name="Mother_CNIC"
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="City"
+                onBlur={handleBlur}
+                onChange={(e)=>{setCity(e.target.value); anotherFunction();}}
+                value={City}
+                name="City"
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Address"
+                onBlur={handleBlur}
+                onChange={(e)=>{setAddress(e.target.value); anotherFunction();}}
+                value={Address}
+                name="Address"
                 sx={{ gridColumn: "span 2" }}
               />
               <TextField
